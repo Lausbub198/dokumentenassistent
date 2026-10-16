@@ -1,0 +1,41 @@
+{
+  "zweck": "Unterlagen für die Steuererklärung 2025, zwei vermietete Wohnungen",
+  "profil_muss_enthalten": {"kategorien": ["Wohnung Nord", "Wohnung Süd"], "felder": ["datum", "betrag"]},
+  "dateien": {
+    "Rechnung (2).pdf":      {"kategorie": "Wohnung Nord", "typ": "Rechnung", "status": "konflikt",
+                              "aussteller": "Heizung Sanitär Krause GmbH", "betrag": "1.240,00 EUR",
+                              "rechnungsnummer": "2025-0815"},
+    "Rechnung (3).pdf":      {"kategorie": "Wohnung Nord", "typ": "Rechnung", "status": "konflikt",
+                              "aussteller": "Heizung Sanitär Krause GmbH", "betrag": "1.180,00 EUR",
+                              "rechnungsnummer": "2025-0815-K"},
+    "Scan_0043.pdf":         {"kategorie": "Wohnung Nord", "typ": "Rechnung", "status": "konflikt", "per_ocr": true,
+                              "aussteller": "Heizung Sanitär Krause GmbH", "betrag": "1.240,00 EUR",
+                              "rechnungsnummer": "2025-0815"},
+    "Dokument1 Kopie.pdf":   {"kategorie": "Wohnung Nord", "typ": "Vertrag",  "status": "sicher",
+                              "betrag": "780,00 EUR"},
+    "Dokument1.pdf":         {"status": "duplikat"},
+    "Anhang.pdf":            {"kategorie": "Wohnung Süd",  "status": "sicher",
+                              "aussteller": "Hausverwaltung Sommer & Partner", "betrag": "1.912,40 EUR"},
+    "IMG_8831.jpg":          {"status": "ocr_unsicher"},
+    "Untitled.pdf":          {"status": "unklar"}
+  },
+  "weitere_dateien": {
+    "Scan_0044.pdf":         {"kategorie": "Wohnung Süd",  "status": "sicher", "per_ocr": true,
+                              "aussteller": "Stadt Neustadt", "betrag": "412,00 EUR"},
+    "Lohnsteuer.pdf":        {"status": "sicher", "aussteller": "Muster Technik AG", "betrag": "52.000,00 EUR"},
+    "Beleg.pdf":             {"status": "sicher", "aussteller": "Tierschutzverein Neustadt e.V.", "betrag": "250,00 EUR"},
+    "Versicherung_2025.pdf": {"status": "sicher", "aussteller": "Nordstern Versicherung", "betrag": "89,50 EUR"},
+    "Hausgeld.pdf":          {"kategorie": "Wohnung Nord", "status": "sicher",
+                              "aussteller": "Immo Verwalt GmbH", "betrag": "2.340,00 EUR"}
+  },
+  "konflikte": [
+    {"feld": "betrag", "dateien": ["Rechnung (2).pdf", "Rechnung (3).pdf"], "werte": ["1.240,00 EUR", "1.180,00 EUR"], "vorschlag": "ersetzt"},
+    {"feld": "betrag", "dateien": ["Scan_0043.pdf", "Rechnung (3).pdf"],   "werte": ["1.240,00 EUR", "1.180,00 EUR"], "vorschlag": "ersetzt"}
+  ],
+  "fragen": [
+    {"frage": "Was hat die Heizungsreparatur in der Wohnung Nord gekostet?", "status": "gefunden", "wortlaut_enthaelt": "1.180,00", "datei": "Rechnung (3).pdf"},
+    {"frage": "Wie hoch ist die Kaltmiete der Wohnung Nord?", "status": "gefunden", "datei": "Dokument1 Kopie.pdf"},
+    {"frage": "Was steht im Kaufvertrag für das Auto?", "status": "nicht_gefunden"}
+  ],
+  "nacharbeit_max_korrekturen": 3
+}

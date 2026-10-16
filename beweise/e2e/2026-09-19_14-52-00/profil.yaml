@@ -1,0 +1,22 @@
+zweck: Unterlagen für die Steuererklärung 2025, zwei vermietete Wohnungen
+kategorien:
+- Wohnung Süd
+- Wohnung Nord
+- Tierschutzverein Neustadt e.V.
+- Immo Verwalt GmbH
+- Sonstiges
+dokumenttypen:
+- Rechnung
+- Vertrag
+- Bescheid
+- Abrechnung
+- Bescheinigung
+- Quittung
+- Zusatz
+- Notiz
+felder:
+- datum
+- aussteller
+- betrag
+- rechnungsnummer
+namensschema: '{datum}_{typ}_{aussteller}'

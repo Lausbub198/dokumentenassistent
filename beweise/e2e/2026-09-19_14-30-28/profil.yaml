@@ -1,0 +1,32 @@
+zweck: Unterlagen für die Steuererklärung 2025, zwei vermietete Wohnungen
+kategorien:
+- Wohnungseigentum
+- Mietobjekte
+- Zuwendungen
+dokumenttypen:
+- Hausgeldabrechnung
+- Nebenkostenabrechnung
+- Zuwendungsbestätigung
+- Mietvertrag
+felder:
+- datum
+- aussteller
+- bezug_objekt
+- zeitraum
+- betraege_heizung
+- betraege_wasser
+- betraege_muell
+- betraege_reinigung
+- gesamtbetrag
+- vorauszahlungen
+- nachzahlung
+- zuwendungsbetrag
+- zuwendender
+- verwendungszweck
+- kaution
+- kaltmiete
+- betriebskostenvorauszahlung
+- hausgeld_monatlich
+- instandhaltungsruecklage
+- verwalterguer
+namensschema: '{datum}_{typ}_{aussteller}'

@@ -1,0 +1,20 @@
+zweck: Unterlagen für die Steuererklärung 2025, zwei vermietete Wohnungen
+kategorien:
+- Wohnung Süd
+- Wohnung Nord
+- Sonstiges
+dokumenttypen:
+- Rechnung
+- Vertrag
+- Bescheid
+- Abrechnung
+- Bescheinigung
+- Quittung
+- Korrekturrechnung
+- Grundsteuerbescheid
+felder:
+- datum
+- aussteller
+- betrag
+- rechnungsnummer
+namensschema: '{datum}_{typ}_{aussteller}'

@@ -1,0 +1,40 @@
+[
+  {
+    "id": "3371bcfbc1e62df136c728ebf9fd5b0547039047a55792981c2c771bf26076e5__8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28__betrag",
+    "feld": "betrag",
+    "hash_a": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28",
+    "hash_b": "3371bcfbc1e62df136c728ebf9fd5b0547039047a55792981c2c771bf26076e5",
+    "wert_a": "1.180,00 EUR",
+    "wert_b": "1.240,00 EUR",
+    "beleg_a": {
+      "fundstelle_id": "D8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28#S1#A1#T1f777e6de15e391159f0",
+      "wortlaut": "Korrigierter Rechnungsbetrag 1.180,00 EUR"
+    },
+    "beleg_b": {
+      "fundstelle_id": "D3371bcfbc1e62df136c728ebf9fd5b0547039047a55792981c2c771bf26076e5#S1#A1#T76b8bfc35af026bee89f",
+      "wortlaut": "Rechnungsbetrag 1.240,00 EUR"
+    },
+    "vorschlag": "ersetzt",
+    "entscheidung": null,
+    "eigener_wert": null
+  },
+  {
+    "id": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28__e56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d__betrag",
+    "feld": "betrag",
+    "hash_a": "e56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d",
+    "hash_b": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28",
+    "wert_a": "1.240,00 EUR",
+    "wert_b": "1.180,00 EUR",
+    "beleg_a": {
+      "fundstelle_id": "De56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d#S1#A1#T2407734fb05882a912b6",
+      "wortlaut": "Rechnungsbetrag 1.240,00 EUR"
+    },
+    "beleg_b": {
+      "fundstelle_id": "D8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28#S1#A1#T1f777e6de15e391159f0",
+      "wortlaut": "Korrigierter Rechnungsbetrag 1.180,00 EUR"
+    },
+    "vorschlag": "ersetzt",
+    "entscheidung": null,
+    "eigener_wert": null
+  }
+]

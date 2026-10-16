@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dokumentenassistent-steuerfall",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "dokumentenassistent", "--quelle", "beispiele/steuerfall/Quelle", "--ziel", "/tmp/da-ziel", "--port", "8765"],
+      "port": 8765
+    }
+  ]
+}

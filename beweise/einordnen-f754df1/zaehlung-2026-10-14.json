@@ -1,0 +1,14 @@
+{
+ "datum": "2026-10-14",
+ "code": "f754df1",
+ "dateien": 113,
+ "korrigiertes_profil": {"auftrag": 512, "kategorien": 9, "dokumenttypen": 18,
+                         "sicher": 71, "unklar": 37, "ocr_unsicher": 5, "konflikte": 0, "minuten": 53.5},
+ "automatisches_profil": {"auftrag": 511, "kategorien": 6, "dokumenttypen": 10,
+                          "sicher": 52, "unklar": 56, "ocr_unsicher": 5, "konflikte": 0, "minuten": 60.1},
+ "vergleich_2026_10_08": {"korrigiert": {"sicher": 76, "unklar": 32, "ocr_unsicher": 5},
+                          "automatisch": {"sicher": 61, "konflikt": 6, "unklar": 41, "ocr_unsicher": 5,
+                                          "konflikte_tabelle": 5}},
+ "offline_vorhersage_regel": {"korrigiert_sicher": 71, "automatisch_sicher": 55, "automatisch_konflikt_ca": 4},
+ "hinweis": "Konflikte direkt aus der Tabelle konflikte der Indexkopien gezaehlt (nur lesend). Nur Zaehlungen, keine Dateinamen oder Werte."
+}

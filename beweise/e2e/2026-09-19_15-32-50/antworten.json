@@ -1,0 +1,32 @@
+[
+  {
+    "frage": "Was hat die Heizungsreparatur in der Wohnung Nord gekostet?",
+    "status": "gefunden",
+    "text": "Die Heizungsreparatur kostete insgesamt 1.180,00 EUR [Rechnung (3).pdf#S1#A1], was eine Korrektur der ursprünglichen Rechnung Nr. 2025-0815 darstellt [Rechnung (3).pdf#S1#A1].",
+    "karten": [
+      {
+        "id": "Rechnung (3).pdf#S1#A1",
+        "datei": "Rechnung (3).pdf",
+        "wortlaut": "Heizung Sanitär Krause GmbH, Handwerkerweg 8, 12345 Neustadt\nKorrekturrechnung Nr. 2025-0815-K\nRechnungsdatum 02.06.2025\nzu Rechnung Nr. 2025-0815 vom 14.05.2025\nEmpfängerin: Andrea Beispiel, Blumenweg 1, 12345 Neustadt\nLeistungsort: Musterstraße 3, Wohnung Nord, 12345 Neustadt\nLeistung: Reparatur Heizung, ausgeführt am 12.05.2025\nGrund der Korrektur: eingebaut wurde eine günstigere Umwälzpumpe.\nArbeitslohn 3,5 Stunden 840,00 EUR\nMaterial Umwälzpumpe 300,00 EUR\nAnfahrtspauschale 40,00 EUR\nKorrigierter Rechnungsbetrag 1.180,00 EUR\nDiese Korrekturrechnung ersetzt die Rechnung Nr. 2025-0815."
+      }
+    ]
+  },
+  {
+    "frage": "Wie hoch ist die Kaltmiete der Wohnung Nord?",
+    "status": "gefunden",
+    "text": "Die Kaltmiete beträgt 780,00 EUR [Dokument1 Kopie.pdf#S1#A1].",
+    "karten": [
+      {
+        "id": "Dokument1 Kopie.pdf#S1#A1",
+        "datei": "Dokument1 Kopie.pdf",
+        "wortlaut": "Mietvertrag über Wohnraum\nVermieterin: Andrea Beispiel, Blumenweg 1, 12345 Neustadt\nMieter: Familie Beispiel, vertreten durch Thomas Beispiel\nMietobjekt: Wohnung Nord, Musterstraße 3, 12345 Neustadt\nZweites Obergeschoss rechts, 68 Quadratmeter, drei Zimmer\nMietbeginn 01.03.2022, auf unbestimmte Zeit\nKaltmiete 780,00 EUR monatlich\nBetriebskostenvorauszahlung 190,00 EUR monatlich\nGesamtmiete 970,00 EUR monatlich"
+      }
+    ]
+  },
+  {
+    "frage": "Was steht im Kaufvertrag für das Auto?",
+    "status": "nicht_gefunden",
+    "text": "nicht gefunden",
+    "karten": []
+  }
+]

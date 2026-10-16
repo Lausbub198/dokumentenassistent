@@ -1,0 +1,277 @@
+# Modelle laufen ausschließlich über Ollama-HTTP. Umschalten = Zeile ändern.
+host: http://localhost:11434
+# Antwortsprache (10.10.2026): geht als System-Anweisung in jeden Modellaufruf; eine Regel ohne Modell
+# (sprache.py) markiert Antworten, die trotzdem in einer anderen Sprache kommen. Geprüft wird nur Deutsch.
+sprache: Deutsch
+# embedding: Suche ist seit 21.09.2026 dense allein (Kosinus, kein BM25), seit 02.10. OHNE Schwelle.
+# AKTUELL (04.10.2026, Nachtentscheidung nach vorab festgelegter Regel): qwen3-embedding:4b mit Pfad-Praefix.
+# Gemessen am echten Bestand (85 beantwortbare Fragen, lokalki-lab/docs/messungen/2026-09-30-c1-embedding.md
+# und 2026-10-03-phase-d-modellwechsel.md):
+#   Zielabsatz im Kontext:  0,6b 64/85   ->   4b 73/85   ->   8b 79/85   (8b zusaetzlich mit Pfad-Praefix: 79)
+#   Produktpfad (Antworten): 4b 62 belegt, 36,6 s/Frage  gegen  8b 60 belegt, 40,2 s/Frage
+# 8b und gemma4:12b passen auf 24 GB NICHT gleichzeitig in den Speicher -- Ollama laedt dann je Frage um
+# (73,5 s je Frage, 8b mit Umladen, Median ueber 100 Fragen -- gegen 40,2 s, 8b ohne fremde
+# Last, Median ueber 20 Tempofragen. Verschiedene Fragemengen, kein direkter Vergleich.)
+# Deshalb 4b: gleiche Qualitaet, kein Umladen.
+# Der alte Begruendungsblock an dieser Stelle (0,6b gegen bge-m3, Recall@1 79/71 auf dem synthetischen
+# Korpus) ist ueberholt -- er war am Lasttest gemessen, nicht am echten Bestand.
+# Nach einem Wechsel den Bestand neu einlesen. Seit Ende September ist das kein STILLER Fehler mehr:
+# Embeddings tragen modell_revision, vorverarbeitung und text_sha256, und durchsuchbare_fundstellen
+# filtert darauf (index.py, _GUELTIGES_EMBEDDING). Ein alter Index liefert also keine falschen Treffer,
+# sondern seine Vektoren gelten als ungueltig und werden beim naechsten Einlesen neu gebildet -- die
+# Suche findet bis dahin weniger, nicht Falsches. Der frueher hier stehende Satz 'speichert Vektoren
+# ohne Modellnamen, macht Indizes still ungueltig' galt bis dahin und ist seitdem ueberholt.
+embedding: qwen3-embedding:4b
+# PDF-Seiten sind Quellenprovenienz, keine Chunk-Grenze. Gepaarter Test auf dem
+# privaten Bestand (26.09.2026): Gold im Top-20-Kontext 61/85 -> 66/85,
+# bei eindeutig zugeordneten Zieldateien 58/81 -> 63/81. Der Kontext wurde
+# dabei im Mittel 14 % laenger; Antwortqualitaet ist noch nicht gemessen.
+# Wir verwenden den seitenuebergreifenden Modus ab jetzt fuer neu ausgelesene
+# Dokumente. Bestehende Fundstellen/Embeddings werden durch diesen Schalter
+# nicht rueckwirkend umgebaut; dafuer ist erneutes Auslesen/Indexieren noetig.
+seitenuebergreifend: true
+# llm: Einordnen/Konflikte -- der Flaschenhals des ganzen Systems. Was hier auf "unklar" landet, kommt nicht in
+# den Index und ist fuer jede Suche unsichtbar, egal wie gut Embedding und Reranker sind.
+# ACHTUNG (Nachtrag 24.09.2026): die Zahlen im naechsten Absatz sind mit num_ctx 4096 gemessen, dem
+# Ollama-Standard von damals. Mit dem damals eingestellten `kontext: 16384` (heute 32768, Block weiter unten) sind es
+# fuer gemma4:12b 18/20 beantwortete Fragen statt 16/20 und 1,7 % falsche Belege statt 1,9 %
+# (beweise/last/2026-09-24/). Die Rangfolge der Modelle ist davon unberuehrt, die absoluten Werte nicht.
+#
+# ACHTUNG, WICHTIGER (gemessen 24.09.2026 abends, echter Bestand (privat, nicht im Repo),
+# 113 Dateien, 4643 Absaetze, 100 Fragen): ALLE Zahlen unten stammen aus dem SYNTHETISCHEN
+# Lasttest und sind auf echten Dokumenten nicht erreicht worden. Dort legte gemma4:12b nur
+# 61 von 113 Dateien in den Index (54 %, nicht 97 %), und von 85 beantwortbaren Fragen wurden
+# 22 mit richtigem Beleg beantwortet -- 26 %, gegen 90 % im Lasttest. Bei den 54 Fragen, deren
+# Datei ueberhaupt im Index lag, waren es 41 %. Ursache NICHT das Modell allein: das
+# automatisch erzeugte Profil verlangte `betrag` von jedem Dokument und kannte 25 vorkommende
+# Dokumenttypen nicht. (Die fehlende zweite Objekt-Kategorie war NICHT die Ursache -- der
+# Gegenversuch ohne Kategorie blieb bei 12.) Der Bestand umfasst zwei Wohnungen
+# (62 Dateien betreffen das eine Objekt, 26 das andere). Wer diese Datei liest, um ein Modell zu
+# waehlen: die Rangfolge unten gilt, die Hoehe der Werte gilt nur fuer den Lasttest-Korpus.
+#
+# Gemessen 21./22.09.2026, Stufe 200, 163 soll-sichere Dateien -- Messdokument liegt im LAB,
+# nicht hier: ../lokalki-lab/docs/messungen/2026-09-21-modellwahl-notebook.md
+#   gemma4:12b-it-q4_K_M  159/163 im Index, 90 % Kategorie, 1,9 % falsche Belege, 8/8 Konflikte, 16 s/Datei
+#   qwen3.5:9b            128/163,          83 %,          2,7 %,                   8/8,         12 s/Datei
+#   qwen3.5:4b-q4_K_M     127/163,          73 %,          6,1 %,                   3/8,          7,8 s/Datei
+#   gemma4:e4b            121/163,          11 % (!),      7,2 %,                   6/8,          7,8 s/Datei
+# gemma4:12b bringt 32 Dokumente mehr in den Index als die 4b-Modelle -- ein Fuenftel des Bestands. Der Preis ist
+# Zeit, und die faellt einmal je Dokument an, nicht bei jeder Frage.
+llm: gemma4:12b-it-q4_K_M     # schneller, aber deutlich schwaecher: qwen3.5:4b-q4_K_M
+# llm_suche: nur für die Frage-Antwort-Suche (Werkstatt.frage). Fehlt der Schlüssel, gilt `llm`.
+# Gemessen 22./23.09.2026, Stufe 200 (noch mit num_ctx 4096; mit kontext 16384 sind es 18/20 statt 16/20 --
+# der Vergleich der beiden Varianten ist davon unberuehrt, beide liefen mit 4k): die Aufteilung bringt KEINEN
+# Vorteil -- gemma4:12b allein 16/20 Fragen (mit kontext 16384: 18/20),
+# gemma4:12b + qwen3.5:4b 15/20 (Unterschied im Rauschen). Sie spart 4 von 116 Minuten. Deshalb hier
+# ausgeschaltet: ein Modell, ein Ladevorgang. Wer schnelle Antworten will und laengeres Einordnen in Kauf
+# nimmt, setzt qwen3.5:4b-q4_K_M ein (3,1 s/Frage gegen 8,4 s bei gemma4:12b).
+# llm_suche: qwen3.5:4b-q4_K_M
+# timeout: Sekunden je HTTP-Aufruf an Ollama. Ohne diesen Schluessel gelten 120 s.
+# Anlass 24.09.2026: Der Lauf ueber 126 echte Dokumente brach beim Profilvorschlag mit
+# "Ollama nicht erreichbar" ab -- in Wahrheit ein Socket-Timeout. Gemessen hat derselbe Aufruf
+# in beweise/last/2026-09-24/ 245 s gebraucht (Stufe 200, unter Fremdlast). Der Messpfad
+# (lasttest.py) setzte laengst 900 s, der Produktpfad lief mit 120 -- die Demo und jeder echte
+# Bestand liefen also mit dem engeren Wert. Ein Modellaufruf, der lange dauert, ist kein Fehler;
+# ein Abbruch mittendrin schon.
+timeout: 900
+# max_antwort_tokens: Obergrenze (num_predict) nur für Freitext-Antworten der Suche, nicht für
+# JSON-Aufrufe beim Einordnen. Gemessen 01.10.2026: Ohne Grenze schrieb gemma4:12b bei einer Frage
+# endlos weiter, bis das Zeitlimit von 900 s griff – im Produkt hinge die Antwort 15 Minuten.
+# Normale Antworten sind kurz (wenige hundert Token); 1024 lässt Spielraum.
+max_antwort_tokens: 1024
+# think: false ist Pflicht. Gemessen 19.09.2026 mit Ollama 0.34.0 + qwen3.5:9b:
+# "low" legt die komplette Antwort ins Feld `thinking`, `response` bleibt leer.
+think: false
+
+# --- Sucheinstellungen (alle optional; weglassen = Verhalten vor dem 23.09.2026) ---
+# reranker: Cross-Encoder, der die besten `rerank_k` der dense-Rangliste vor dem Prompt neu sortiert.
+# Einzige gemessene Massnahme, die auf BEIDEN Korpora wirkt: malerbetrieb Stufe 200 (694 Absaetze,
+# 14 Fragen) dense@qwen3-embedding Recall@1 79 -> 93, Recall@8 93 -> 100 mit BAAI/bge-reranker-v2-m3
+# bei k=20; GermanQuAD (474 Absaetze, 60 menschliche Fragen, 22.09.) dense@bge-m3 Recall@1 88 -> 98,
+# Recall@8 97 -> 100. Mit Reranker liegen beide Embeddings gleichauf (97-98) -- die Embedding-Wahl,
+# die ohne Reranker korpusabhaengig kippt (malerbetrieb qwen 79 > bge 71; GermanQuAD bge 91 > qwen 82),
+# wird damit zweitrangig. Kosten: 0,5 s/Frage auf MPS (kurze Geschaeftsabsaetze), 3-10 s/Frage auf CPU
+# (lange Wikipedia-Absaetze). Braucht `uv sync --extra reranker` -- fehlt das Extra, bricht der Start
+# mit Hinweis ab (kein stiller Verzicht). Details: docs/retrieval-befund-2026-09-21.md,
+# docs/retrieval-massnahmen-2026-09-21.md. Standard: keiner.
+reranker: BAAI/bge-reranker-v2-m3
+# rerank_k: wie viele dense-Treffer der Reranker sieht. Standard 20. k ist die OBERGRENZE: was nicht unter
+# den ersten k des Embeddings steht, kann der Reranker nicht nach vorne holen. Recall@20 = 100 % bei beiden
+# Embeddings, Recall@8 nur 93 % -- deshalb 20 und nicht 8.
+# Korrektur 24.09.2026: hier stand "andere k sind nicht gemessen". Das war falsch -- k=8 WURDE am 22.09. auf
+# BEIDEN Korpora mitgemessen (beweise/retrieval/2026-09-22/), und zwar geringfuegig schlechter:
+#   malerbetrieb (694 Absaetze, 14 Fragen), qwen3-embedding + bge-reranker:
+#     k=20  Recall@1 93, Recall@5 100, MRR 0.964, 0,53 s/Frage
+#     k=8   Recall@1 86, Recall@5  93, MRR 0.898, 0,27 s/Frage   -> eine Frage weniger
+#   GermanQuAD (474 Absaetze, 60 Fragen), qwen3-embedding + bge-reranker:
+#     k=20  Recall@1 97, Recall@5 98, MRR 0.973, 9,6 s/Frage
+#     k=8   Recall@1 97, Recall@5 98, MRR 0.973, 3,1 s/Frage     -> identisch
+# k=8 halbiert bis drittelt also die Zeit je Frage und kostet auf dem Geschaeftskorpus eine von 14 Fragen.
+# Bei 14 Fragen ist eine Frage 7 Prozentpunkte -- das ist ein Hinweis, kein sauber gemessener Abstand.
+# 20 bleibt, weil die Zeit je Frage hier nicht der Engpass ist (das Einordnen ist es).
+rerank_k: 20
+# rerank_geraet: mps | cpu. Standard: automatisch (mps auf Apple Silicon, sonst cpu). Kosten siehe oben.
+# Gemessen 22.09.: mps haengt bei langen Absaetzen (Wikipedia) in MPSStream::synchronize -- bei kurzen
+# Geschaeftsabsaetzen laeuft es. Bei Haengern auf cpu stellen.
+rerank_geraet: mps
+# top_n: Absaetze, die in den Prompt gehen.
+#
+# WAR 5 bis zum 25.09.2026, abgeleitet am synthetischen Korpus (694 Absaetze, 14 Fragen): dort lag der
+# richtige Absatz mit Reranker ohnehin unter den ersten fuenf (Recall@5 = 100 %), und 5 sparte Kontext,
+# ohne eine Antwort zu kosten. Auf dem ECHTEN Bestand (1643 Absaetze, 85 Fragen) ist das falsch --
+# dieselbe Klasse Fehler wie bei kontext, rerank_k und dem Profil: ein Wert, der nur fuer den Korpus
+# gilt, auf dem er gemessen wurde.
+#
+# Gemessen 25.09.2026, gleiche Kette, nur top_n veraendert (Antwort woertlich im Prompt, von 85 Fragen):
+#   top_n  1 -> 32 (38 %)      top_n 12 -> 51 (60 %)
+#   top_n  5 -> 45 (53 %)      top_n 20 -> 56 (66 %)
+#   top_n  8 -> 49 (58 %)      top_n 30 -> 66 (78 %) bei rerank_k 50
+# End-to-end ueber alle 100 Fragen (rerank_k 20): top_n 5 = 22/85 richtig belegt, top_n 20 = 38/85.
+# Die Fangfragen blieben in beiden Laeufen bei 15/15 -- mehr Absaetze verfuehren das Modell NICHT zum
+# Erfinden. Beleg: docs/messungen/2026-09-24-praxistest-echter-bestand.md im Lab-Repo.
+#
+# KORREKTUR 25.09.2026: hier stand "top_n 30 liegt im Median bei ~32 000 Zeichen (~9 700 Token)". Das war
+# GESCHAETZT und um mehr als das Doppelte daneben. Nachgemessen ueber alle 85 Fragen (Zeichen im fertigen
+# Prompt, Umrechnung 3,3 Zeichen je Token):
+#   top_n  5: Median  7.724  Max  15.882   ueber 16384 Token:  0/85
+#   top_n 12: Median 18.497  Max  34.795   ueber 16384 Token:  0/85
+#   top_n 20: Median 30.069  Max  57.876   ueber 16384 Token:  3/85  (4 %)
+#   top_n 30: Median 41.069  Max  86.020   ueber 16384 Token: 21/85  (25 %)
+#   top_n 50: Median 57.907  Max 112.280   ueber 16384 Token: 53/85  (62 %)
+# Mit `kontext: 32768` (siehe unten, kostet gemessen nichts) sind 20 und 30 sicher, 50 nicht.
+top_n: 20
+
+# Kontextfenster (num_ctx). Weglassen = Ollama-Standard 4096. Ollama kuerzt zu lange Prompts still.
+# Gemessen 24.09.2026, Stufe 200, sonst identische Konfiguration (beweise/last/2026-09-24/):
+#   4096 (Standard): 16/20 Fragen, Rahmenvertrag_Geruestbau.pdf bleibt "unklar"
+#   16384:           18/20 Fragen, derselbe Vertrag wird "sicher" -- und damit ueberhaupt erst durchsuchbar
+# Ursache, nachgerechnet statt vermutet: Das Budget von 2.400 Woertern ergibt bei diesem 30-Seiten-Vertrag
+# einen Prompt von 19.160 Zeichen plus 1.557 Zeichen Schema = rund 6.278 Tokens. Bei num_ctx 4096 fiel davon
+# still ein Drittel weg; das Modell beurteilte ein angeschnittenes Dokument, fand kein Datum und keinen
+# Aussteller, und "unklar" heisst: nicht im Index, fuer jede Suche unsichtbar. Der alte Kommentar an
+# MAX_WOERTER_STANDARD ("~3.000 Tokens, passt in 4.096") rechnete mit einem englischen Token-Verhaeltnis
+# und ohne die ID-Liste im Schema.
+#
+# 25.09.2026 auf 32768 ERHOEHT, und der Preis ist gemessen statt vermutet. Anlass: bei top_n 30 sprengen
+# 21 von 85 Prompts die 16384 Token (Median 41.069 Zeichen, Max 86.020, 3,3 Zeichen je Token). Ollama kuerzt
+# dann STILL -- und weil `suche._prompt` die Frage ans ENDE setzt, verliert das Modell die Aufgabe selbst.
+# Gemessener Einbruch: auf 33 Fragen 9 statt 20 richtig, 21 statt 7 Abweisungen.
+#
+# Speicherkosten, live gemessen (`ollama ps` nach einem Aufruf je Stufe, gemma4:12b-it-q4_K_M):
+#   num_ctx 16384 -> 8,4 GB      num_ctx 32768 -> 8,1 GB      num_ctx 65536 -> 8,2 GB
+# Der Kontext kostet praktisch NICHTS; die Schwankung ist Messrauschen. gemma4 benutzt Sliding-Window-
+# Attention, der KV-Cache waechst daher nicht linear mit num_ctx. Die frueher hier vermutete Warnung
+# ("mehr Speicher fuer den KV-Cache") war falsch -- sie stand da, ohne je nachgemessen worden zu sein.
+# Damit erledigt sich auch OLLAMA_KV_CACHE_TYPE: es gibt nichts zu sparen.
+#
+# Warum nicht hoeher: bei top_n 50 laegen 53 von 85 Prompts ueber 32768 (Max 112.280 Zeichen ~ 34.000 Token).
+# Erst 65536 wuerde das tragen, und top_n 50 ist ohnehin nicht gemessen besser.
+kontext: 32768
+
+# --- OCR (alle optional; ganzer Block weglassen = paddleocr mit Drehung, german, Schwelle 0,80) ---
+#
+# ocr: paddleocr | tesseract. Welche Engine Bilder und Bild-PDFs liest. Was hier auf Rauschen landet,
+# kommt gar nicht erst vor das Sprachmodell -- die OCR entscheidet, was ueberhaupt durchsuchbar wird.
+# Gemessen auf ZWEI Arten, weil jede fuer sich eine Luecke hat:
+#   (1) 96 gerenderte PDF-Seiten MIT Textebene als maschineller Wahrheit (docs/ocr-portabel-2026-09-23.md):
+#       paddleocr liest auf 81 von 96 Seiten mehr richtige Woerter als tesseract (F1 Wort 0.981 gegen
+#       0.964), Zahlentreue 94,7 gegen 84,3 %, verfehlte Zahlen und Fristen 110 statt 320.
+#   (2) 10 ECHTE Scan-/Fotoseiten, vom Auftraggeber gegengelesen (beweise/ocr-scans/2026-09-24/):
+#       paddleocr 7 brauchbar / 0 Fehler-in-Zahlen / 3 unbrauchbar, tesseract 3 / 1 / 5.
+# Kosten: rund 29 s je Seite statt 1 s (134 OCR-pflichtige Seiten des Bestands: ~66 min statt ~2 min,
+# einmalig beim Einlesen) und das Extra `ocr-paddle` (paddlepaddle + paddlex, Modelle werden beim ersten
+# Lauf nach ~/.paddlex geladen). Fehlt das Extra, bricht der Start mit Hinweis ab -- kein stiller
+# Rueckfall auf tesseract, denn das waere eine andere Messlage als die hier eingestellte.
+# Alternative `tesseract`: braucht nur das tesseract-Binary und ist 30x schneller, liest aber auf
+# echten Scans weniger als die Haelfte der Seiten brauchbar. Hintergrund: docs/ocr-entscheidung-2026-09-24.md.
+ocr: paddleocr
+# ocr_drehung: schaltet bei `ocr: paddleocr` GENAU EINE Vorstufe ein -- die Seitenorientierung
+# (use_doc_orientation_classify). Bei `ocr: tesseract` ohne Wirkung. In allen Messungen bis zum
+# 24.09.2026 war sie AUS -- fuer die Vergleichbarkeit mit tesseract, das nichts Entsprechendes hat.
+# Gemessen 24.09.2026 an denselben 10 Scan-Seiten, jede der drei Vorstufen EINZELN
+# (beweise/ocr-drehung/2026-09-24/laeufe.jsonl). Ueber alle zehn Seiten, gegen "gar keine Drehung"
+# (9248 Zeichen / 179 Zahlen / 21 Datumsangaben / 248 s):
+#   nur Seitenorientierung   10410 Zeichen / 182 Zahlen / 26 Daten / 247 s   <- eingestellt
+#   nur Zeilenorientierung   10165          / 184        / 22      / 252 s
+#   nur Entzerrung            8871          / 166        / 21      / 242 s
+#   alle drei zusammen        9807          / 168        / 25      / 260 s
+# Die Seitenorientierung ist der ganze Hebel. Genau die drei Seiten, die der Auftraggeber wegen
+# Verdrehung als unbrauchbar markiert hat, springen an:
+#   Seite 1: 122 -> 495 Zeichen, 0 -> 2 Datumsangaben, Konfidenz 0,774 -> 0,966
+#   Seite 2:  97 -> 564 Zeichen, 0 -> 2 Datumsangaben, Konfidenz 0,697 -> 0,987
+#   Seite 7:  91 -> 413 Zeichen, 0 -> 1 Datumsangabe,  Konfidenz 0,681 -> 0,947
+# Und sie kostet nichts: die sieben anderen Seiten sind ZEICHENWEISE IDENTISCH zum Lauf ohne
+# Drehung (Zeichen, Zahlen, Datumsangaben und Konfidenz je Seite gleich), die Laufzeit ebenso.
+#
+# Die beiden anderen Vorstufen bleiben AUS und sind bewusst NICHT einzeln schaltbar -- sie
+# schaden gemessen, ein Schluessel dafuer waere Konfiguration fuer einen Fall, den es nicht gibt:
+#   * Entzerrung (use_doc_unwarping) verschlechtert 4 der 7 guten Seiten. Nachgeprueft ueber die
+#     ZAHLENMENGEN (zahlenmengen.json), weil eine Zaehlung "verloren" nicht von "anders gelesen"
+#     trennt: auf Seite 4 verschwinden 6 von 13 Zahlen ERSATZLOS (0 neue). Sie hebt die drei
+#     verdrehten Seiten auch nicht (0 Datumsangaben).
+#   * Zeilenorientierung (use_textline_orientation) liest ueber alle Seiten 2 Zahlen mehr, aber
+#     4 Datumsangaben weniger, verschlechtert Seite 10 leicht (1889 -> 1845 Zeichen) und holt auf
+#     den drei verdrehten Seiten nur 1 statt 5 Datumsangaben.
+#   * Der frueher erwogene SAMMELSCHALTER "alle drei an" liegt bei 168 erkannten Zahlen und damit
+#     UNTER "gar keine Drehung" (179) -- die Entzerrung frisst den Gewinn wieder auf.
+# **Ungemessen bleibt, ob der aufgerichtete Text RICHTIG ist**: die Urteile des Auftraggebers
+# haengen an den ungedrehten Texten. Das ist der erste Punkt der naechsten Gegenlese-Runde.
+ocr_drehung: true
+# ocr_sprache: Sprachkennung der gewaehlten Engine -- paddleocr erwartet "german", tesseract "deu".
+# Ohne diesen Schluessel gilt automatisch die Kennung der eingestellten Engine; ein zweiter Schluessel
+# waere Konfiguration fuer einen Fall, den es nicht gibt (es laeuft immer genau eine Engine).
+# ocr_sprache: german
+# ocr_schwelle: unter diesem Wert gilt eine Seite als `ocr_unsicher` -- die Datei geht dann NICHT ans
+# Sprachmodell und landet nicht im Index. Die Schwelle gehoert zur Engine und nicht zum Code, weil die
+# beiden Engines verschiedene Groessen melden: tesseract mittelt ueber WORTKAESTEN, paddleocr ueber
+# ZEILEN-Scores. Auf denselben 10 Scan-Seiten liegt der Median bei 0,994 (paddleocr) gegen 0,799
+# (tesseract) -- mit der alten 0,6 wuerde `ocr_unsicher` unter paddleocr faktisch nie ausloesen.
+#
+# WICHTIG, damit dieser Wert nicht mehr verspricht, als er haelt: unter `ocr_drehung: true` WEIST
+# 0,80 AUF DEN GEMESSENEN SEITEN NICHTS AB AUSSER LEEREN ERGEBNISSEN. Das ist der Befund, kein
+# Versehen. Neu abgeleitet 24.09.2026 auf der Variante, die hier laeuft (paddleocr +
+# Seitenorientierung, beweise/ocr-drehung/2026-09-24/, Spalte `nur_seitenorientierung`), gegen die
+# Urteile aus beweise/ocr-scans/2026-09-24/urteile.json:
+#   "unbrauchbar" (3 Seiten): 0,9468 / 0,9656 / 0,9872
+#   "brauchbar"   (7 Seiten): 0,9752 / 0,9937 / 0,9946 / 0,9964 / 0,9969 / 1,0000
+#                             und eine reine Bildseite ohne Text (0,0)
+# Die Klassen UEBERLAPPEN: 0,9752 (brauchbar) liegt unter 0,9872 (unbrauchbar). Kein Wert trennt sie
+# noch. Der nach Youden beste waere 0,9937 (Sensitivitaet 3/3, Spezifitaet 5/7, Preis: 2 von 7
+# brauchbaren Seiten faelschlich unsicher) -- aber er wuerde genau die drei Seiten abweisen, die die
+# Seitenorientierung gerade repariert hat, plus eine brauchbare Seite mit 61 Zahlen. Das waere der
+# Gewinn der Drehung, an der naechsten Stelle wieder weggeworfen.
+# Grund der Ueberlappung: die Urteile haengen an den UNGEDREHTEN Texten und sind fuer die
+# Produktvariante veraltet. Gegen veraltete Etiketten zu optimieren waere Schoenrechnen.
+# Der eingestellte Wert 0,80 liegt unter allen zehn gemessenen Seitenwerten (Minimum 0,9468) und
+# ueber den Werten, die dieselben drei Seiten OHNE Orientierungskorrektur hatten (0,681/0,697/0,774):
+# eine Seite, bei der die Korrektur versagt und die Engine wirklich Rauschen liest, faellt weiter
+# durch. Auf dieser Stichprobe: Sensitivitaet 0/3, Spezifitaet 6/7 -- abgewiesen wird genau die Seite
+# ohne jeden Text, die nach der Regel "kein Text erkannt -> Sicherheit 0.0" ohnehin 0,0 bekommt.
+# **10 Seiten sind eine winzige Stichprobe**, und die "unbrauchbar"-Klasse besteht aus DREI Seiten mit
+# EINER gemeinsamen Ursache (Verdrehung) -- genau der, die jetzt behoben ist. Belastbar waere die
+# Ableitung erst mit ~100 gegengelesenen Seiten aus mehreren Fehlerursachen, gegengelesen auf den
+# aufgerichteten Texten. Geprueftes Alternativsignal (Zeichen je Seitenflaeche) und Vorbehalt:
+# docs/ocr-entscheidung-2026-09-24.md.
+ocr_schwelle: 0.80
+
+# abnahme_protokoll: knapp | voll (Standard: knapp). Anlass 23.09.2026: der Auftraggeber will die
+# Abnahme-Ansicht (/abnahme) mit ECHTEN, teils vertraulichen Dokumenten benutzen.
+# beweise/abnahme/<datum>/urteile.jsonl liegt im Projektordner unter Git -- "voll" schreibt Frage,
+# Antworttext und den Wortlaut der Belegkarten im Klartext hinein, ein unbedachtes `git add`
+# haette damit fremden Dokumentinhalt im Repository. "knapp" (Standard) belegt nur das Urteil
+# (Hashes/Laengen), keinen Inhalt. "voll" bleibt fuer den synthetischen Korpus
+# (beispiele/malerbetrieb) sinnvoll, wo Inhalt unkritisch und zur Fehlersuche nuetzlich ist.
+# abnahme_protokoll: knapp
+
+# --- Phase D, Schritt 3 (03.10.2026): gemessenes Produktverfahren, Nutzerentscheidung ---
+# Kaskade + strenge Stufe-2-Anweisung + Pfad-Präfix. Phase B (8B): 57/85 in beiden Chunk-Reihenfolgen
+# korrekt, 15/15 Negativfragen abgewiesen (lokalki-lab, 2026-10-03-phase-b-runde3.md).
+# Embedding 4B statt 8B (Nachtentscheidung 04.10., vorab festgelegte Regel): Produktpfad Mehrfach-Gold
+# 62 vs 60, 15/15, Tempo 36,6 vs 40,2 s; 8B + gemma passen auf 24 GB nicht gleichzeitig in den Speicher
+# (lokalki-lab, 2026-10-03-phase-d-modellwechsel.md).
+pdf_extraktion: pdftotext_layout
+kontext_praefix: pfad
+kontextauswahl: dynamisch
+kaskade: true
+kaskade_stufe2: streng
+schwelle: 0   # 0,49 war am 0,6B-Embedding kalibriert; C6 zeigte: eine Schwelle trennt Negativfragen nicht

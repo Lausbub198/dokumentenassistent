@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.dokumentenassistent/
+Zielablage/
+.DS_Store
+
+# Abnahme-Urteile (23.09.2026): urteile.jsonl (Standard-Modus "knapp") ist absichtlich NICHT
+# ignoriert -- die Zeilen sind inhaltsfrei (Hashes/Laengen, kein Dokumenttext) und als Beleg
+# gedacht, siehe beweise/abnahme/README.md. urteile-voll.jsonl (Modus "voll") schreibt Frage,
+# Antworttext und Belegwortlaut im Klartext -- fuer den synthetischen malerbetrieb-Korpus in
+# Ordnung, aber ein mechanischer statt disziplinarischer Schutz, falls jemand "voll" versehentlich
+# mit echten/vertraulichen Dokumenten faehrt.
+beweise/abnahme/**/urteile-voll.jsonl
+
+# Gegenlese-Paket echter Scan-Seiten (23.09.2026): anders als jeder andere Beweis in diesem
+# Ordner enthaelt es **absichtlich** Dokumentinhalt -- die gerenderten Seitenbilder und den
+# OCR-Volltext. Das ist der Zweck (der Auftraggeber soll sehen, was die OCR gesehen hat), und
+# der Korpus ist privat. Der Ordner bleibt deshalb vollstaendig lokal -- einschliesslich
+# laeufe.jsonl, das zwar inhaltsfrei ist (nur Kennzahlen), aber im selben Ordner liegt. Was
+# versioniert bleibt, ist der Befund in docs/ocr-scans-2026-09-23.md. Ein Ordner-Ignore statt einer
+# Dateiliste, weil hier Bilder, HTML und zurueckgegebene Urteile zusammenliegen und eine
+# Liste genau die Datei vergessen wuerde, die spaeter dazukommt.
+beweise/ocr-scans/
+.geparkt/

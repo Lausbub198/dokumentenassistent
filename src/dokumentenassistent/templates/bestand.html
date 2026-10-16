@@ -1,0 +1,105 @@
+{% extends "basis.html" %}
+{% from "makros.html" import badge, konfliktkarte %}
+{% block titel %}Bestand{% endblock %}
+
+{% block inhalt %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">03</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Bestand</h1>
+    <p class="vorspann">
+      Was bestätigt wurde, liegt als Kopie in der Zielablage. Daneben steht, was
+      absichtlich draußen bleibt &mdash; und jede Entscheidung, die dazu geführt hat.
+    </p>
+  </div>
+</section>
+
+<section class="gitter-zwei">
+  <article class="tafel">
+    <h2 class="tafel-titel">Zielablage</h2>
+    {% if ablage %}
+    <p class="tafel-notiz"><code>{{ zielablage }}</code></p>
+    {% for gruppe in ablage %}
+    <section class="ordner">
+      <h3 class="ordner-name">{{ gruppe.kategorie }}<span class="ordner-zahl">{{ gruppe.dateien | length }}</span></h3>
+      <ul class="baum">
+        {% for eintrag in gruppe.dateien %}
+        <li class="baum-zeile">
+          <span class="baum-name mono">{{ eintrag.zielpfad.name }}</span>
+          <span class="baum-quelle">aus {{ eintrag.vorschlag.datei_name }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
+    {% else %}
+    <p class="hinter">
+      Noch keine Kopien. Die Zielablage entsteht erst durch eine Freigabe im Eingang.
+    </p>
+    {% endif %}
+  </article>
+
+  <article class="tafel">
+    <h2 class="tafel-titel">Duplikate</h2>
+    {% if duplikate %}
+    <p class="tafel-notiz">
+      Bytegleiche Zweitfunde. Sie werden nicht erneut abgelegt und bleiben liegen, wo sie sind.
+    </p>
+    <ul class="baum">
+      {% for paar in duplikate %}
+      <li class="baum-zeile">
+        {{ badge('duplikat') }}
+        <span class="baum-name">{{ paar.duplikat.name }}</span>
+        <span class="baum-quelle">gleich wie {{ paar.original.name if paar.original else '—' }}</span>
+        <code class="baum-pfad" title="{{ paar.duplikat.pfad }}">{{ (paar.duplikat.pfad|string).split('/')[-2:]|join('/') }}</code>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="hinter">Keine Duplikate gefunden.</p>
+    {% endif %}
+  </article>
+</section>
+
+{% if offene_karten or entschiedene_karten %}
+<section class="block block-hell">
+  <div class="block-rand"><span class="block-nr">§</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Konflikte</h2>
+    {% if offene_karten %}
+    <p class="vorspann">{{ offene_karten | length }} offen &mdash; solange sie offen sind, bleiben
+      die beteiligten Dateien aus der Zielablage heraus.</p>
+    {% for karte in offene_karten %}{{ konfliktkarte(karte, '/bestand') }}{% endfor %}
+    {% endif %}
+    {% if entschiedene_karten %}
+    <h3 class="unter-titel">Entschieden</h3>
+    {% for karte in entschiedene_karten %}{{ konfliktkarte(karte, '/bestand') }}{% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+<section class="block">
+  <div class="block-rand"><span class="block-nr">¶</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Protokoll</h2>
+    <p class="vorspann">
+      Die letzten 20 Einträge, neueste oben. Das Protokoll wird nur angehängt,
+      nie geändert &mdash; es liegt als <code>protokoll.jsonl</code> neben dem Index.
+    </p>
+    {% if protokoll %}
+    <ol class="protokoll">
+      {% for eintrag in protokoll %}
+      <li class="protokoll-zeile" data-art="{{ eintrag.art }}">
+        <time class="protokoll-zeit mono">{{ eintrag.zeit }}</time>
+        <span class="protokoll-titel">{{ eintrag.titel }}</span>
+        <span class="protokoll-detail">{{ eintrag.detail }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <p class="hinter">Noch keine Entscheidung protokolliert.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

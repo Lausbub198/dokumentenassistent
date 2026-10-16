@@ -1,0 +1,115 @@
+{% extends "basis.html" %}
+{% from "makros.html" import badge, konfliktkarte %}
+{% block titel %}{{ datei.name }}{% endblock %}
+
+{% block inhalt %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">02</span></div>
+  <div class="block-inhalt">
+    <p class="rueckweg"><a href="/eingang">&larr; Zurück zum Stapel</a></p>
+    <h1 class="titel titel-datei">{{ datei.name }}</h1>
+    <p class="datei-meta">
+      {{ badge(status) }}
+      <code class="datei-pfad" title="{{ datei.pfad }}">{{ (datei.pfad|string).replace((quelle|string) ~ "/", "") }}</code>
+      <span>{{ (datei.groesse / 1024) | round | int }} kB</span>
+    </p>
+    {% if zielpfad %}
+    <p class="hinter">Bereits kopiert nach <code title="{{ zielpfad }}">{{ (zielpfad|string).replace((zielablage|string) ~ "/", "") }}</code>.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="gegenblick">
+  <div class="gegenblick-spalte">
+    <h2 class="spalten-titel">Original <a class="belegkarte-oeffnen" href="/dokument/{{ datei.hash }}" target="_blank" rel="noopener">Dokument öffnen ↗</a></h2>
+    <p class="spalten-notiz">
+      {{ fundstellen | length }} Absätze, so wie sie in der Datei stehen. Hervorgehoben
+      ist, worauf sich ein Feld beruft.
+    </p>
+    {% if fundstellen %}
+    <ol class="absaetze">
+      {% for fundstelle in fundstellen %}
+      <li class="absatz" id="fs-{{ loop.index }}">
+        <p class="absatz-ort">{% if fundstelle.seiten | length > 1 %}Seiten {{ fundstelle.seiten[0] }}–{{ fundstelle.seiten[-1] }}{% else %}Seite {{ fundstelle.seite }}{% endif %} &middot; Absatz {{ fundstelle.absatz }}</p>
+        <p class="absatz-text">{{ hervorheben(fundstelle.text, marken.get(fundstelle.id, [])) }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <p class="hinter">
+      Kein lesbarer Text. Bei Scans und Fotos heißt das: die OCR war zu unsicher,
+      um daraus einen Vorschlag zu bauen. Die Datei bleibt unverändert liegen.
+    </p>
+    {% endif %}
+  </div>
+
+  <div class="gegenblick-spalte">
+    <h2 class="spalten-titel">Felder und Belege</h2>
+    {% if vorschlag %}
+    <p class="spalten-notiz">{{ vorschlag.begruendung or 'Ohne Begründung des Modells.' }}</p>
+    <dl class="kopfdaten">
+      <div><dt>Kategorie</dt><dd>{{ vorschlag.kategorie or '—' }}</dd></div>
+      <div><dt>Dokumenttyp</dt><dd>{{ vorschlag.typ or '—' }}</dd></div>
+      <div class="kopfdaten-breit"><dt>Zielname</dt><dd class="mono">{{ vorschlag.zielname or '—' }}</dd></div>
+    </dl>
+
+    <ul class="felder">
+      {% for feld in vorschlag.felder %}
+      <li class="feldkarte" data-feldstatus="{{ feld.status }}">
+        <p class="feldkarte-kopf">
+          <span class="feldkarte-name">{{ feld.name }}</span>
+          <span class="feldkarte-wert">{{ feld.wert or 'unbelegt' }}</span>
+        </p>
+        {% if feld.beleg %}
+        <p class="feldkarte-quelle mono">{{ feld.beleg.fundstelle_id }}</p>
+        <p class="feldkarte-zitat"><mark>{{ feld.beleg.wortlaut }}</mark></p>
+        {% else %}
+        <p class="feldkarte-leer">Kein Beleg im Text &mdash; das Feld bleibt offen.</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <form method="post" action="/eingang/korrigieren" class="formular formular-korrektur">
+      <h3 class="korrektur-titel">Korrigieren</h3>
+      <input type="hidden" name="hash" value="{{ datei.hash }}">
+      <input type="hidden" name="zurueck" value="/eingang/{{ datei.hash }}">
+      <label class="feld">
+        <span class="feld-name">Kategorie</span>
+        <input type="text" name="kategorie" value="{{ vorschlag.kategorie or '' }}"
+               list="kategorien-liste" autocomplete="off">
+      </label>
+      <label class="feld">
+        <span class="feld-name">Zielname</span>
+        <input type="text" name="zielname" class="mono" value="{{ vorschlag.zielname or '' }}"
+               autocomplete="off">
+      </label>
+      {% if profil %}
+      <datalist id="kategorien-liste">
+        {% for kategorie in profil.kategorien %}<option value="{{ kategorie }}">{% endfor %}
+      </datalist>
+      {% endif %}
+      <div class="formular-fuss">
+        <button type="submit" class="knopf knopf-haupt">Korrektur übernehmen</button>
+        <span class="formular-notiz">Setzt die Zeile auf <em>sicher</em> und wird als
+          Menschenentscheidung protokolliert.</span>
+      </div>
+    </form>
+    {% else %}
+    <p class="hinter">Noch kein Vorschlag für diese Datei. <a href="/eingang">Stapel einordnen.</a></p>
+    {% endif %}
+  </div>
+</section>
+
+{% if karten %}
+<section class="block block-hell">
+  <div class="block-rand"><span class="block-nr">!</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Offener Konflikt zu dieser Datei</h2>
+    {% for karte in karten %}
+    {{ konfliktkarte(karte, '/eingang/' ~ datei.hash) }}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

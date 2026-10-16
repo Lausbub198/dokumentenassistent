@@ -1,0 +1,106 @@
+{% extends "basis.html" %}
+{% from "makros.html" import belegkarten %}
+{% block titel %}Abnahme{% endblock %}
+
+{% block inhalt %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">05</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Abnahme</h1>
+    <p class="vorspann">
+      Eigene Dokumente, eigene Fragen, eigenes Urteil. Jedes „richtig“ oder „falsch“ wird
+      angehängt &mdash; nichts wird überschrieben, nichts gelöscht. So zeigt sich mit der Zeit,
+      wie oft die Antworten wirklich stimmen.
+    </p>
+
+    <form method="post" action="/abnahme" class="frageform">
+      <label class="verborgen" for="frage">Frage</label>
+      <textarea id="frage" name="frage" rows="2" required autofocus
+                placeholder="Was steht in meinen Unterlagen zu …?">{{ frage }}</textarea>
+      <button type="submit" class="knopf knopf-haupt knopf-gross">Im Bestand suchen</button>
+    </form>
+  </div>
+</section>
+
+{% if antwort %}
+<section class="antwort" data-zustand="{{ antwort.status }}">
+  <header class="antwort-kopf">
+    <span class="zustand" data-zustand="{{ antwort.status }}">{{ ZUSTAND_TEXT.get(antwort.status, antwort.status) }}</span>
+    <h2 class="antwort-frage">{{ frage }}</h2>
+  </header>
+
+  <p data-antwortstuetzung="{{ antwort.stuetzung.status }}">
+    Antwortstützung: {{ antwort.stuetzung.status }}.
+    {% if antwort.stuetzung.status == 'ungeprueft' %}Die Antwort ist inhaltlich nicht verifiziert.{% endif %}
+    Gültige Quellenverweise allein bestätigen nicht die Aussage.
+  </p>
+  {% if antwort.status == 'nicht_gefunden' %}
+  <div class="antwort-leer">
+    <p class="antwort-leer-titel">Kein Beleg im bestätigten Bestand.</p>
+    <p class="antwort-leer-text">
+      Auch das ist ein Befund und darf beurteilt werden: War hier wirklich nichts zu finden,
+      oder hätte es etwas geben müssen?
+    </p>
+  </div>
+  {% else %}
+  <p class="antwort-text">{{ antwort_html(antwort.text, antwort.karten) }}</p>
+  <h3 class="karten-titel">Belege</h3>
+  {{ belegkarten(antwort.karten, aufklappbar=True) }}
+  {% endif %}
+
+  <form method="post" action="/abnahme/urteil" class="formular formular-urteil">
+    <input type="hidden" name="frage" value="{{ frage }}">
+    <input type="hidden" name="antwort" value="{{ antwort.text }}">
+    <input type="hidden" name="antwort_status" value="{{ antwort.status }}">
+    <input type="hidden" name="karten" value="{{ karten_json }}">
+    <label class="feld feld-breit">
+      <span class="feld-name">Richtige Antwort / Bemerkung</span>
+      <span class="feld-notiz">Freiwillig. Bei „falsch“ ist sie das eigentlich Wertvolle.</span>
+      <input type="text" name="bemerkung" autocomplete="off" placeholder="z. B. Betrag stimmt, Datum nicht">
+    </label>
+    <div class="formular-fuss">
+      <button type="submit" name="urteil" value="richtig" class="knopf knopf-haupt">richtig</button>
+      <button type="submit" name="urteil" value="falsch" class="knopf">falsch</button>
+    </div>
+  </form>
+</section>
+{% endif %}
+
+<section class="block">
+  <div class="block-inhalt">
+    <h2 class="titel-klein">Bisher {{ urteile_gesamt }} Urteile &mdash;
+      {{ urteile_richtig }} richtig, {{ urteile_falsch }} falsch</h2>
+    {% if urteile %}
+    <table class="stapel">
+      <thead>
+        <tr><th>Zeit</th><th>Frage</th><th>Urteil</th><th>Bemerkung</th></tr>
+      </thead>
+      <tbody>
+        {% for u in urteile %}
+        <tr data-urteil="{{ u.urteil }}">
+          <td>{{ u.zeit | zeit_lokal }}</td>
+          {% if u.frage is defined %}
+          <td>{{ u.frage }}</td>
+          <td>{{ u.urteil }}</td>
+          <td>{{ u.bemerkung }}</td>
+          {% else %}
+          <td>
+            inhaltsfreies Protokoll &mdash; der Wortlaut steht nur im Browser, nicht in der
+            Datei ({{ u.status }}, {{ u.karten_anzahl }} Beleg(e), Frage {{ u.frage_zeichen }}
+            Zeichen, Antwort {{ u.antwort_zeichen }} Zeichen)
+          </td>
+          <td>{{ u.urteil }}</td>
+          <td>{{ u.bemerkung_zeichen }} Zeichen</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="vorspann">Angezeigt sind die letzten {{ urteile | length }}. Alles steht in
+      <code>{{ urteile_pfad }}</code>.</p>
+    {% else %}
+    <p class="vorspann">Noch kein Urteil. Die erste Frage oben stellen.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

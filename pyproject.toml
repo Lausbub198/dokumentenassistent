@@ -1,0 +1,58 @@
+[project]
+name = "dokumentenassistent"
+version = "0.1.0"
+description = "Lokaler Dokumentenassistent: ordnet Dokumente per Profil ein, legt nach Freigabe Kopien an, beantwortet Fragen nur mit geprüften Fundstellen."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Andreas Nürenberg", email = "andreas.nuerenberg@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.9",
+    "pypdf>=5.0",
+    "pytesseract>=0.3.13",
+    "pillow>=11.0",
+    "numpy>=2.0",
+    "pyyaml>=6.0",
+    "python-docx>=1.1",
+    "mcp>=2",
+]
+
+[project.optional-dependencies]
+reranker = ["sentence-transformers>=3.0"]
+eval = ["pyarrow>=17"]  # nur für den GermanQuAD-Korpus (Arrow-Dateien), nicht im Produktpfad
+# Alle drei Gruppen gehören zu ocr_vergleich.py (Messung), nicht zum Produktpfad. Fehlt eine
+# Gruppe, überspringt `pruefe_engines` die Engine mit Meldung — kein stiller Verzicht.
+# macOS-only, nur noch Messlatte: Apple Vision ist seit 23.09.2026 kein Kandidat mehr,
+# weil das Produkt auf allen Rechnern laufen soll.
+ocr = ["pyobjc-framework-Vision>=10", "pyobjc-framework-Quartz>=10"]
+ocr-paddle = ["paddleocr>=3.0", "paddlepaddle>=3.0"]
+ocr-easy = ["easyocr>=1.7"]
+# Nur Messung (Pilot strukturierte Auslesung, Plan 2026-09-29 Schritt 1.5), nicht im Produktpfad.
+docling = ["docling>=2.131"]
+# surya ist NICHT aufgenommen: surya-ocr fordert pillow<11, das Produkt pillow>=11 —
+# siehe docs/ocr-portabel-2026-09-23.md ("Was nicht ging und warum").
+
+[project.scripts]
+dokumentenassistent = "dokumentenassistent.web:main"
+dokumentenassistent-mcp = "dokumentenassistent.mcp_server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "reportlab>=4.0",
+    "httpx>=0.27",
+    "pyarrow>=17",  # tests/test_germanquad.py schreibt Mini-Arrow-Dateien in tmp_path
+]
+
+[build-system]
+requires = ["uv_build>=0.11.2,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = ["e2e: braucht laufenden Ollama und den Beispielkorpus"]
+addopts = "-m 'not e2e'"

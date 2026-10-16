@@ -1,0 +1,42 @@
+{
+  "ist": {
+    "Anhang.pdf": "sicher",
+    "Dokument1 Kopie.pdf": "sicher",
+    "Dokument1.pdf": "duplikat",
+    "IMG_8831.jpg": "ocr_unsicher",
+    "Rechnung (2).pdf": "konflikt",
+    "Rechnung (3).pdf": "konflikt",
+    "Scan_0043.pdf": "konflikt",
+    "Untitled.pdf": "unklar"
+  },
+  "soll": {
+    "Anhang.pdf": "sicher",
+    "Dokument1 Kopie.pdf": "sicher",
+    "Dokument1.pdf": "duplikat",
+    "IMG_8831.jpg": "ocr_unsicher",
+    "Rechnung (2).pdf": "konflikt",
+    "Rechnung (3).pdf": "konflikt",
+    "Scan_0043.pdf": "konflikt",
+    "Untitled.pdf": "unklar"
+  },
+  "weitere_ist": {
+    "Beleg.pdf": "unklar",
+    "Hausgeld.pdf": "sicher",
+    "Lohnsteuer.pdf": "unklar",
+    "Scan_0044.pdf": "sicher",
+    "Versicherung_2025.pdf": "unklar"
+  },
+  "duplikate": [
+    "Dokument1.pdf"
+  ],
+  "freigegeben": [
+    "Wohnung Süd/2025-03-28_Abrechnung_Hausverwaltung Sommer & Partner.pdf",
+    "Wohnung Nord/2022-02-24_Vertrag_Andrea Beispiel.pdf",
+    "Wohnung Nord/2022-02-24_Vertrag_Andrea Beispiel (2).pdf",
+    "Wohnung Nord/2025-04-15_Abrechnung_Immo Verwalt GmbH.pdf",
+    "Wohnung Nord/2025-05-14_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "Wohnung Nord/2025-06-02_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "Wohnung Nord/2025-05-14_Rechnung_Heizung Sanitär Krause GmbH (2).pdf",
+    "Wohnung Süd/2025-01-20_Bescheid_Stadt Neustadt Amt für Finanzen.pdf"
+  ]
+}

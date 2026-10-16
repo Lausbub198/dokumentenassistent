@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titel %}Dokumentenassistent{% endblock %} · Dokumentenassistent</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+  {% block kopf %}{% endblock %}
+</head>
+<body>
+
+<header class="kopf">
+  <div class="bahn kopf-zeile">
+    <div class="marke">
+      <span class="marke-wort">Dokumenten<em>assistent</em></span>
+      <span class="marke-zusatz">Lokaler Bestand &middot; nichts verlässt diesen Rechner</span>
+    </div>
+    {% if quelle %}
+    <dl class="pfade">
+      <div>
+        <dt>Quelle</dt>
+        <dd><code title="{{ quelle }}">{{ (quelle|string).rstrip('/').split('/')[-1] }}</code></dd>
+      </div>
+      <div>
+        <dt>Zielablage</dt>
+        <dd><code title="{{ zielablage }}">{{ (zielablage|string).rstrip('/').split('/')[-1] }}</code></dd>
+      </div>
+      {% if modelle %}
+      <div class="pfade-modelle">
+        <dt>Modelle</dt>
+        <dd>
+          <details class="modelle">
+            <summary title="Welche Modelle dieser Bestand gerade benutzt">{{ modelle[1][1] }}</summary>
+            <div class="modelle-feld">
+            <dl class="modelle-liste">
+              {% for name, wert in modelle if not modellwahl or name in ("Reranker", "Laufzeit") %}
+              <div><dt>{{ name }}</dt><dd><code>{{ wert }}</code></dd></div>
+              {% endfor %}
+            </dl>
+            {% if modellwahl %}{% set w = modellwahl %}
+            <form method="post" action="/modelle" class="modelle-wahl" id="modellwahl"
+                  data-embedding="{{ w.embedding }}" data-fundstellen="{{ w.fundstellen }}">
+              <input type="hidden" name="zurueck" value="{{ request.url.path }}">
+              <input type="hidden" name="embedding_bestaetigt" value="">
+              {% for feld, titel, liste in [("llm", "Sprachmodell (Einordnen)", w.verfuegbar.sprachmodelle),
+                                            ("llm_suche", "Sprachmodell (Antworten)", w.verfuegbar.sprachmodelle),
+                                            ("embedding", "Embedding", w.verfuegbar.embeddings)] %}
+              <label>{{ titel }}
+                <select name="{{ feld }}">
+                  {% for m in ([w[feld]] + liste) | unique %}<option {% if m == w[feld] %}selected{% endif %}>{{ m }}</option>{% endfor %}
+                </select>
+              </label>
+              {% endfor %}
+              <label>Antwortsprache <input type="text" name="sprache" value="{{ w.sprache }}"></label>
+              <button type="submit" class="knopf knopf-haupt">Übernehmen</button>
+            </form>
+            <dialog class="modelle-dialog" id="embedding-dialog">
+              <h2>Embedding wirklich wechseln?</h2>
+              <p>Von <code data-alt></code> auf <code data-neu></code>. Das hat Folgen:</p>
+              <ul>
+                <li>Alle <strong>{{ w.fundstellen }}</strong> gespeicherten Vektoren gelten danach nicht mehr.</li>
+                <li>Das Werkzeug bildet sie sofort neu. Das dauert, je nach Modell und Bestand Minuten bis Stunden.</li>
+                <li>Bis dahin findet die Suche weniger, aber nichts Falsches. Einordnung und Freigaben bleiben.</li>
+                <li>Die gemessenen Trefferquoten gelten für das bisherige Embedding, nicht für das neue.</li>
+              </ul>
+              <div class="modelle-dialog-knoepfe">
+                <button type="button" class="knopf knopf-still" data-schliessen>Doch nicht</button>
+                <button type="button" class="knopf knopf-haupt" data-bestaetigen>Ja, wechseln und neu einbetten</button>
+              </div>
+            </dialog>
+            {% endif %}
+            <p class="modelle-notiz">Gespeichert in <code>modelle.yaml</code>, gilt auch nach einem Neustart.</p>
+            </div>
+          </details>
+        </dd>
+      </div>
+      {% endif %}
+      <div class="pfade-wechsel">
+        <dt>Bestand</dt>
+        <dd>
+          {% if job and job.laeuft %}
+          <span class="wechsel-gesperrt" title="Solange eine Einordnung läuft, bleibt der Bestand offen">wechseln gesperrt</span>
+          {% else %}
+          <a href="/start" class="wechsel">Bestand wechseln</a>
+          {% endif %}
+        </dd>
+      </div>
+    </dl>
+    {% endif %}
+  </div>
+
+  {% if quelle %}
+  <nav class="bereiche" aria-label="Bereiche">
+    <ol class="bahn bereiche-liste">
+      {% for schluessel, pfad, nummer, name, unterzeile in BEREICHE %}
+      <li>
+        <a href="{{ pfad }}" class="bereich"
+           {% if aktiv == schluessel %}aria-current="page" data-aktiv="ja"{% endif %}>
+          <span class="bereich-nr">{{ nummer }}</span>
+          <span class="bereich-text">
+            <span class="bereich-name">{{ name }}</span>
+            <span class="bereich-unter">{{ unterzeile }}</span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </nav>
+  {% endif %}
+</header>
+
+<main class="bahn">
+  {% if hinweis %}
+  <p class="meldung meldung-hinweis" role="status">{{ hinweis }}</p>
+  {% endif %}
+  {% block inhalt %}{% endblock %}
+</main>
+
+<footer class="fuss bahn">
+  <span>Vorschlag &rarr; Prüfung &rarr; Freigabe. Originale werden nie verändert.</span>
+  {% if profil %}<span class="fuss-profil">Profil: {{ profil.zweck }}</span>{% endif %}
+</footer>
+
+<script>
+  // Nur Bedienkomfort, ohne JS bleibt alles bedienbar:
+  // (a) laufende Sekunden in jedem [data-verstrichen]
+  // (b) Formulare mit data-wartet zeigen nach dem Absenden, was gerade passiert,
+  //     mit Animation und Sekundenzähler (Profil vorschlagen ~20 s, Frage ~50 s).
+  (function () {
+    const text = (s) => (s < 60 ? s + ' s' : Math.floor(s / 60) + ' min ' + String(s % 60).padStart(2, '0') + ' s');
+    document.querySelectorAll('[data-verstrichen]').forEach((uhr) => {
+      let s = parseInt(uhr.dataset.verstrichen, 10) || 0;
+      setInterval(() => { s += 1; uhr.textContent = text(s); }, 1000);
+    });
+    const wahl = document.getElementById('modellwahl');
+    const dialog = document.getElementById('embedding-dialog');
+    if (wahl && dialog) {
+      wahl.addEventListener('submit', (e) => {
+        const neu = wahl.elements.embedding.value;
+        if (neu === wahl.dataset.embedding || wahl.elements.embedding_bestaetigt.value === 'ja') return;
+        e.preventDefault();
+        dialog.querySelector('[data-alt]').textContent = wahl.dataset.embedding;
+        dialog.querySelector('[data-neu]').textContent = neu;
+        dialog.showModal();
+      });
+      dialog.querySelector('[data-schliessen]').addEventListener('click', () => dialog.close());
+      dialog.querySelector('[data-bestaetigen]').addEventListener('click', () => {
+        wahl.elements.embedding_bestaetigt.value = 'ja';
+        dialog.close();
+        wahl.requestSubmit();
+      });
+    }
+    document.querySelectorAll('form[data-wartet]').forEach((formular) => {
+      formular.addEventListener('submit', () => {
+        const knopf = formular.querySelector('button[type="submit"]');
+        if (knopf) knopf.disabled = true;
+        const hinweis = document.createElement('div');
+        hinweis.className = 'wartehinweis';
+        hinweis.setAttribute('role', 'status');
+        hinweis.setAttribute('aria-live', 'polite');
+        hinweis.innerHTML = '<span class="wartehinweis-punkte" aria-hidden="true"><i></i><i></i><i></i></span>'
+          + '<span class="wartehinweis-text"></span><span class="wartehinweis-zeit">0 s</span>';
+        hinweis.querySelector('.wartehinweis-text').textContent = formular.dataset.wartet;
+        formular.after(hinweis);
+        const zeit = hinweis.querySelector('.wartehinweis-zeit');
+        let s = 0;
+        setInterval(() => { s += 1; zeit.textContent = text(s); }, 1000);
+      });
+    });
+  })();
+</script>
+{% block skripte %}{% endblock %}
+</body>
+</html>

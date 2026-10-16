@@ -1,0 +1,204 @@
+{# Bausteine, die in mehreren Bereichen gleich aussehen müssen. #}
+
+{% macro badge(status) -%}
+<span class="badge" data-status="{{ status }}">{{ STATUS_TEXT.get(status, status) }}</span>
+{%- endmacro %}
+
+{% macro zitat(fundstelle, wortlaut) -%}
+<blockquote class="zitat">
+  {% if fundstelle %}
+  <p class="zitat-text">{{ hervorheben(fundstelle.text, [wortlaut]) }}</p>
+  <p class="zitat-quelle">
+    <span class="zitat-datei">{{ fundstelle.datei_name }}</span>
+    <span class="zitat-ort">{% if fundstelle.seiten | length > 1 %}Seiten {{ fundstelle.seiten[0] }}–{{ fundstelle.seiten[-1] }}{% else %}Seite {{ fundstelle.seite }}{% endif %} &middot; Absatz {{ fundstelle.absatz }}</span>
+  </p>
+  {% else %}
+  <p class="zitat-text"><mark>{{ wortlaut }}</mark></p>
+  {% endif %}
+</blockquote>
+{%- endmacro %}
+
+{# Belege einer Antwort. `aufklappbar` legt den Absatz in ein <details> — gleiche Karten,
+   nur zusammengefaltet; gebraucht in /abnahme, wo viele Antworten untereinander stehen. #}
+{% macro belegkarten(karten, aufklappbar=False) -%}
+<div class="belegkarten">
+  {% for karte in karten %}
+  <article class="belegkarte" id="beleg-{{ loop.index }}">
+    <span class="belegkarte-nr">{{ loop.index }}</span>
+    <header class="belegkarte-kopf">
+      <span class="belegkarte-datei">{{ karte.fundstelle.datei_name }}</span>
+      <span class="belegkarte-ort">{% if karte.fundstelle.seiten | length > 1 %}Seiten {{ karte.fundstelle.seiten[0] }}–{{ karte.fundstelle.seiten[-1] }}{% else %}Seite {{ karte.fundstelle.seite }}{% endif %} &middot; Absatz {{ karte.fundstelle.absatz }}</span>
+      <a class="belegkarte-oeffnen" href="/dokument/{{ karte.fundstelle.datei_hash }}#page={{ karte.fundstelle.seite }}"
+         target="_blank" rel="noopener" title="Original in einem neuen Tab öffnen, bei PDFs auf Seite {{ karte.fundstelle.seite }}">Dokument öffnen ↗</a>
+    </header>
+    {% if aufklappbar %}
+    <details class="belegkarte-klapp">
+      <summary>Absatz im Wortlaut</summary>
+      <p class="belegkarte-text">{{ hervorheben(karte.fundstelle.text, [karte.wortlaut]) }}</p>
+    </details>
+    {% else %}
+    <p class="belegkarte-text">{{ hervorheben(karte.fundstelle.text, [karte.wortlaut]) }}</p>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro konfliktkarte(karte, zurueck) -%}
+{% set k = karte.konflikt %}
+<article class="karte karte-konflikt" id="konflikt-{{ k.id }}">
+  <header class="karte-kopf">
+    {{ badge("konflikt") }}
+    <h3 class="karte-titel">Feld <em>{{ k.feld }}</em> &mdash; zwei Werte, eine Entscheidung</h3>
+  </header>
+
+  <div class="gegenueber">
+    <section class="gegen-seite">
+      <p class="gegen-datei">{{ karte.name_a }}</p>
+      <p class="gegen-wert">{{ k.wert_a }}</p>
+      {{ zitat(karte.fundstelle_a, k.beleg_a.wortlaut) }}
+    </section>
+    <p class="gegen-mitte" aria-hidden="true">gegen</p>
+    <section class="gegen-seite">
+      <p class="gegen-datei">{{ karte.name_b }}</p>
+      <p class="gegen-wert">{{ k.wert_b }}</p>
+      {{ zitat(karte.fundstelle_b, k.beleg_b.wortlaut) }}
+    </section>
+  </div>
+
+  <p class="karte-vorschlag">
+    Vorschlag des Werkzeugs:
+    <strong>{{ KONFLIKT_TEXT.get(k.vorschlag, k.vorschlag) }}</strong>
+    &mdash; ein späteres Datum ist ein Hinweis, keine Wahrheit.
+  </p>
+
+  {% if k.entscheidung %}
+  <p class="karte-entschieden">
+    Entschieden: <strong>{{ KONFLIKT_TEXT.get(k.entscheidung, k.entscheidung) }}</strong>
+    {% if k.eigener_wert %}&middot; eigener Wert: <em>{{ k.eigener_wert }}</em>{% endif %}
+  </p>
+  {% else %}
+  <form method="post" action="/konflikt/{{ k.id }}" class="optionen">
+    <input type="hidden" name="zurueck" value="{{ zurueck }}">
+    {% for wert, beschriftung, erklaerung in KONFLIKT_OPTIONEN %}
+    <button type="submit" name="entscheidung" value="{{ wert }}" title="{{ erklaerung }}"
+            class="knopf knopf-option{% if wert == k.vorschlag %} knopf-empfohlen{% endif %}">
+      {{ beschriftung }}
+    </button>
+    {% endfor %}
+    <span class="option-eigen">
+      <input type="text" name="eigener_wert" placeholder="Wert eintragen"
+             aria-label="eigener Wert" autocomplete="off">
+      <button type="submit" name="entscheidung" value="eigener_wert" class="knopf knopf-option">
+        eigener Wert
+      </button>
+    </span>
+  </form>
+  {% endif %}
+</article>
+{%- endmacro %}
+
+{% macro balken(verteilung, filter, ordner, klasse) -%}
+<div class="balken {{ klasse }}" aria-hidden="true">
+  {% for p in verteilung -%}
+  <a class="balken-teil" data-status="{{ p.status }}" style="flex-basis: {{ p.anteil }}%"
+     title="{{ STATUS_TEXT[p.status] }}: {{ p.anzahl }}"
+     href="/eingang{{ filter.query(ordner=ordner, status=(p.status,)) if ordner else filter.query(status=(p.status,)) }}"></a>
+  {%- endfor %}
+</div>
+{%- endmacro %}
+
+{% macro freigabeleiste(stelle, anzahl_sicher, gefiltert=False) -%}
+<div class="leiste leiste-{{ stelle }}">
+  {% if stelle == 'oben' %}
+  <label class="alle-anhaken">
+    <input type="checkbox" id="alle-sicheren">
+    <span>Alle {% if gefiltert %}sichtbaren {% endif %}sicheren Zeilen anhaken <span class="leiste-zahl">({{ anzahl_sicher }})</span></span>
+  </label>
+  {% else %}
+  <p class="leiste-notiz">
+    Kopieren schreibt nur in die Zielablage. Die Originale bleiben, wo sie sind.
+  </p>
+  {% endif %}
+  <button type="submit" class="knopf knopf-haupt knopf-freigabe">
+    Bestätigte Kopien erzeugen<span class="zaehler" data-zaehler></span>
+  </button>
+</div>
+{%- endmacro %}
+
+{% macro profilformular(p, ziel, beschriftung, notiz) -%}
+<form method="post" action="{{ ziel }}" class="formular formular-profil">
+  <label class="feld feld-breit">
+    <span class="feld-name">Zweck des Bestands</span>
+    <input type="text" name="zweck" value="{{ p.zweck if p else '' }}" required
+           placeholder="z. B. Unterlagen der Musterfirma GmbH, Geschäftsjahr 2025, für den Steuerberater">
+  </label>
+
+  <div class="feld-gitter">
+    <label class="feld">
+      <span class="feld-name">Kategorien</span>
+      <span class="feld-notiz">Eine pro Zeile. Ordnungsgruppen der Zielablage.</span>
+      <textarea name="kategorien" rows="6" spellcheck="false">{{ p.kategorien | join('\n') if p else '' }}</textarea>
+    </label>
+    <label class="feld">
+      <span class="feld-name">Dokumenttypen</span>
+      <span class="feld-notiz">Eine pro Zeile. Was für ein Papier ist das?</span>
+      <textarea name="dokumenttypen" rows="6" spellcheck="false">{{ p.dokumenttypen | join('\n') if p else '' }}</textarea>
+    </label>
+    <label class="feld">
+      <span class="feld-name">Felder</span>
+      <span class="feld-notiz">Eine pro Zeile, klein und ohne Umlaute.</span>
+      <textarea name="felder" rows="6" spellcheck="false">{{ p.felder | join('\n') if p else '' }}</textarea>
+    </label>
+  </div>
+
+  <label class="feld feld-breit">
+    <span class="feld-name">Eigentümer</span>
+    <span class="feld-notiz">Wem gehört der Bestand? Entscheidet, was eingehend und was ausgehend ist.</span>
+    <input type="text" name="eigentuemer"
+           value="{{ p.eigentuemer if p and p.eigentuemer else '' }}" placeholder="z. B. Malerbetrieb Hoffmann GmbH">
+  </label>
+
+  <label class="feld feld-breit">
+    <span class="feld-name">Namensschema</span>
+    <span class="feld-notiz">Platzhalter aus den Feldern oder <code>typ</code> / <code>kategorie</code>.</span>
+    <input type="text" name="namensschema" class="mono"
+           value="{{ p.namensschema if p else '' }}" placeholder="{datum}_{typ}_{aussteller}">
+  </label>
+
+  <div class="formular-fuss">
+    <button type="submit" class="knopf knopf-haupt">{{ beschriftung }}</button>
+    {% if notiz %}<span class="formular-notiz">{{ notiz }}</span>{% endif %}
+  </div>
+</form>
+{%- endmacro %}
+
+{# Fortschrittsanzeige eines Hintergrundjobs. Seit 24.09.2026 geteilt: bis dahin
+   hatte nur das Einordnen eine, das Auslesen (OCR) lief synchron und stumm --
+   gemessen 403 s ueber 126 echte Dateien, bei einem Scan-Bestand Stunden. #}
+{% macro fortschrittsblock(job, fortschritt, titel, abbruch_ziel, notiz) -%}
+<div class="fortschritt" role="status" aria-live="polite">
+  <div class="fortschritt-kopf">
+    <span class="fortschritt-titel">{{ titel }}</span>
+    <span class="fortschritt-zaehler">
+      {% if job.gesamt %}Datei {{ fortschritt.nummer }} von {{ job.gesamt }}{% else %}wird vorbereitet{% endif %}
+    </span>
+  </div>
+  <div class="balken balken-fortschritt" aria-hidden="true">
+    <span class="balken-teil" data-status="sicher" style="width: {{ fortschritt.anteil }}%"></span>
+  </div>
+  <dl class="fortschritt-daten">
+    <div><dt>Gerade</dt><dd class="mono fortschritt-datei">{{ job.aktuell or '—' }}</dd></div>
+    <div><dt>Verstrichen</dt><dd data-verstrichen="{{ fortschritt.verstrichen_s }}">{{ fortschritt.verstrichen }}</dd></div>
+    <div><dt>Rest etwa</dt><dd>{{ fortschritt.rest }}</dd></div>
+  </dl>
+  <div class="fortschritt-fuss">
+    {% if abbruch_ziel %}
+    <form method="post" action="{{ abbruch_ziel }}">
+      <button type="submit" class="knopf knopf-still">Abbrechen</button>
+    </form>
+    {% endif %}
+    <p class="fortschritt-notiz">{{ notiz }}</p>
+  </div>
+</div>
+{%- endmacro %}

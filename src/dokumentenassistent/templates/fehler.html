@@ -1,0 +1,23 @@
+{% extends "basis.html" %}
+{% block titel %}Das ging nicht{% endblock %}
+
+{% block inhalt %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">!</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Das ging nicht</h1>
+    <p class="vorspann">
+      Nichts wurde verändert. Weder Originale noch Zielablage noch Protokoll haben
+      diesen Schritt gesehen.
+    </p>
+    <blockquote class="fehlermeldung">
+      <p class="fehler-text">{{ meldung }}</p>
+      <p class="fehler-art mono">{{ art }}</p>
+    </blockquote>
+    <p class="weiter">
+      <a href="/profil" class="knopf knopf-still">Zum Profil</a>
+      <a href="/eingang" class="knopf knopf-still">Zum Eingang</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

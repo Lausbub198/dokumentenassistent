@@ -1,0 +1,70 @@
+{% extends "basis.html" %}
+{% from "makros.html" import belegkarten %}
+{% block titel %}Finden{% endblock %}
+
+{% block inhalt %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">04</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Finden</h1>
+    <p class="vorspann">
+      Gefragt wird nur der bestätigte Bestand. Jede Aussage trägt ihre Fundstelle;
+      ohne Fundstelle gibt es keine Antwort.
+    </p>
+
+    <form method="post" action="/finden" class="frageform"
+          data-wartet="Sucht im Bestand, liest die Fundstellen und prüft jedes Zitat">
+      <label class="verborgen" for="frage">Frage</label>
+      <textarea id="frage" name="frage" rows="2" required autofocus
+                placeholder="Wie hoch ist die Kaltmiete?">{{ frage }}</textarea>
+      <button type="submit" class="knopf knopf-haupt knopf-gross">Im Bestand suchen</button>
+    </form>
+  </div>
+</section>
+
+{% if antwort %}
+<section class="antwort" data-zustand="{{ antwort.status }}">
+  <header class="antwort-kopf">
+    <span class="zustand" data-zustand="{{ antwort.status }}">{{ ZUSTAND_TEXT.get(antwort.status, antwort.status) }}</span>
+    <h2 class="antwort-frage">{{ frage }}</h2>
+  </header>
+
+  {% if antwort.sprachhinweis %}
+  <p class="meldung meldung-hinweis" role="status" data-sprachhinweis>{{ antwort.sprachhinweis }}</p>
+  {% endif %}
+  <p class="antwort-pruefhinweis" data-antwortstuetzung="{{ antwort.stuetzung.status }}">
+    {% if antwort.stuetzung.status == 'ungeprueft' %}Geprüft ist: Jedes Zitat steht wörtlich im Dokument.
+    Ob es die Frage richtig beantwortet, zeigt ein Blick in den Beleg.{% endif %}
+  </p>
+  {% if antwort.status == 'nicht_gefunden' %}
+  <div class="antwort-leer">
+    <p class="antwort-leer-titel">Kein Beleg im bestätigten Bestand.</p>
+    <p class="antwort-leer-text">
+      Das heißt nicht, dass es die Angabe nicht gibt &mdash; nur, dass sie hier nicht
+      belegt ist. Vielleicht ist das Dokument noch nicht freigegeben, oder die Frage
+      trifft andere Worte als das Papier.
+    </p>
+    {% if antwort.text and antwort.text != 'nicht gefunden' %}
+    <p class="antwort-modelltext">{{ antwort.text }}</p>
+    {% endif %}
+  </div>
+  {% else %}
+  <p class="antwort-text">{{ antwort_html(antwort.text, antwort.karten) }}</p>
+
+  {% if antwort.status == 'widerspruechlich' %}
+  <p class="antwort-warnung">
+    Mindestens ein Beleg hängt an einem offenen Konflikt. Die Antwort ist so lange
+    nicht verlässlich, wie der Widerspruch nicht entschieden ist.
+    {% for konflikt in strittige %}
+    <a class="antwort-konfliktlink" href="/bestand#konflikt-{{ konflikt.id }}">Konflikt zu
+      <em>{{ konflikt.feld }}</em> ansehen</a>
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  <h3 class="karten-titel">Belege</h3>
+  {{ belegkarten(antwort.karten) }}
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}

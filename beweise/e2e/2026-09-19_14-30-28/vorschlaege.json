@@ -1,0 +1,1574 @@
+[
+  {
+    "datei_hash": "84c608a071a851f3c7dfae222d9baad418c74f5f36cf26d6fe1a59c8f4043ba9",
+    "datei_name": "Anhang.pdf",
+    "kategorie": "Mietobjekte",
+    "typ": "Nebenkostenabrechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Felder wie 'zuwendungsbetrag', 'kaution', 'kaltmiete' etc. wurden weggelassen, da die entsprechenden Werte nicht wörtlich im Dokumenttext vorkommen."
+  },
+  {
+    "datei_hash": "675baeb310961f686893f7023fc1d085e80ccbce12eb0f3127b5d00c22fd1256",
+    "datei_name": "Beleg.pdf",
+    "kategorie": "Zuwendungen",
+    "typ": "Zuwendungsbestätigung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Zuwendungsbestätigung für einen Tierschutzverein. Es enthält keine Daten zu Mietobjekten oder Wohnungseigentum (wie Nebenkostenabrechnungen). Daher werden nur die Felder ausgefüllt, die im Text explizit vorkommen."
+  },
+  {
+    "datei_hash": "3f06db1a47eb50b743aa10c0e1d335c8b200b4ac5454ddfff04adeb906cf02f9",
+    "datei_name": "Dokument1 Kopie.pdf",
+    "kategorie": "Mietobjekte",
+    "typ": "Mietvertrag",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist ein Mietvertrag für eine Wohnung (Kategorie: Mietobjekte). Es enthält keine Abrechnungen (Hausgeldabrechnung, Nebenkostenabrechnung) oder Zuwendungsbestätigungen. Daher sind Felder wie betraege_heizung, gesamtbetrag oder zuwendungsbetrag nicht ausfüllbar, da die wörtlichen Werte im Text fehlen."
+  },
+  {
+    "datei_hash": "68a7578a01871d1a446f87676b3725a8d8f9ddf0b3076812e0a1e79c3d56d5b5",
+    "datei_name": "Hausgeld.pdf",
+    "kategorie": "Wohnungseigentum",
+    "typ": "Hausgeldabrechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Hausgeldabrechnung für Wohnungseigentum (Nr. 7). Die Felder wurden direkt aus dem Text des Absatzes [Hausgeld.pdf#S1#A1] extrahiert. Felder wie Heizkosten oder Wasser sind im Text nicht explizit als solche benannt, daher werden sie weggelassen. Der Begriff 'Gehaltenes Hausgeld' wurde wörtlich zitiert, um den monatlichen Betrag zu belegen."
+  },
+  {
+    "datei_hash": "2cddae49bed1a5f108b64705ac254f0c592f6424a66560422f20dd822773fa76",
+    "datei_name": "IMG_8831.jpg",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "ocr_unsicher",
+    "begruendung": "Keine Fundstellen: kein Text zum Einordnen"
+  },
+  {
+    "datei_hash": "51e31b3bffe7bc9575a99cd6b63107acc23be54d18ca0cfa835bdadfa946ba84",
+    "datei_name": "Lohnsteuer.pdf",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument 'Lohnsteuer.pdf' ist eine Lohnsteuerbescheinigung für einen Arbeitnehmer (Andrea Beispiel). Es enthält keine Informationen zu vermieteten Wohnungen, Mietobjekten oder Zuwendungen. Daher können keine der erlaubten Kategorien ('Wohnungseigentum', 'Mietobjekte', 'Zuwendungen') oder Dokumenttypen ('Hausgeldabrechnung', 'Nebenkostenabrechnung', 'Zuwendungsbestätigung', 'Mietvertrag') zugeordnet werden. Zudem fehlen im Text alle spezifischen Felder wie 'datum' (im Sinne eines Belegdatums für eine Abrechnung), 'bezug_objekt', 'betraege_heizung', etc., die für die Erfassung von Mietdaten oder Zuwendungen erforderlich wären. Die einzigen Daten sind Gehalts- und Steuerdaten, die nicht in den definierten Feldern abgedeckt sind."
+  },
+  {
+    "datei_hash": "e56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d",
+    "datei_name": "Rechnung (2).pdf",
+    "kategorie": "Mietobjekte",
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Rechnung für Heizungsreparaturen an einer vermieteten Wohnung. Daher wird die Kategorie 'Mietobjekte' gewählt. Der Dokumenttyp passt nicht exakt auf die erlaubte Liste (Hausgeldabrechnung, Nebenkostenabrechnung, Zuwendungsbestätigung, Mietvertrag), daher 'unbekannt'. Felder wie 'betraege_wasser', 'betraege_muell' etc. wurden nur teilweise gefüllt, da der Text spezifische Positionen nennt (Arbeitslohn als Heizung, Material als Müll/Wasser/Reinigung im weiteren Sinne oder getrennt), aber keine expliziten Labels für Wasser/Müll existieren. Da der Text 'Material Umwälzpumpe' und 'Anfahrtspauschale' enthält, werden diese den verbleibenden Heizkostenfeldern zugeordnet, da keine anderen Felder passen. Die Felder ohne Wert im Dokument werden weggelassen, wie angefordert."
+  },
+  {
+    "datei_hash": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28",
+    "datei_name": "Rechnung (3).pdf",
+    "kategorie": "Mietobjekte",
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Korrekturrechnung für Heizungsreparaturen in einer vermieteten Wohnung. Daher wird die Kategorie 'Mietobjekte' gewählt. Der Dokumenttyp passt nicht exakt auf die erlaubte Liste (Hausgeldabrechnung, Nebenkostenabrechnung, Zuwendungsbestätigung, Mietvertrag), daher wird 'unbekannt' verwendet. Felder wie 'betraege_heizung' und 'gesamtbetrag' werden mit dem korrigierten Endbetrag gefüllt, da dies der zu versteuernde Betrag ist. Einzelpositionen (Arbeitslohn, Material) werden nicht separat in die spezifischen Heizungs- oder Wasserfelder zerlegt, sondern im Gesamtbetrag zusammengefasst, da das Dokument keine Aufschlüsselung nach diesen spezifischen Kategorien bietet."
+  },
+  {
+    "datei_hash": "3371bcfbc1e62df136c728ebf9fd5b0547039047a55792981c2c771bf26076e5",
+    "datei_name": "Scan_0043.pdf",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Rechnung für Handwerkerleistungen (Heizungsreparatur). Es enthält keine der erlaubten Dokumenttypen (Hausgeldabrechnung, Nebenkostenabrechnung, Zuwendungsbestätigung, Mietvertrag) und fällt daher nicht in die Kategorie 'Wohnungseigentum' oder 'Mietobjekte' im Sinne von Verwaltungsdokumenten für diese spezifischen Zwecke. Zudem sind keine der geforderten Felder (wie betraege_heizung, kaltmiete etc.) mit den wörtlichen Werten aus dem Text belegt, da die Positionen nicht explizit als solche bezeichnet oder aufgeschlüsselt sind."
+  },
+  {
+    "datei_hash": "323ee672a22a1150fb9b1c84126666a4c7f770b09ca138bc94107e7fbbd3a873",
+    "datei_name": "Scan_0044.pdf",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist ein Grundsteuerbescheid (Steuerfestsetzung), keine der erlaubten Dokumenttypen (Hausgeldabrechnung, Nebenkostenabrechnung, Zuwendungsbestätigung, Mietvertrag). Daher werden keine Felder erfasst."
+  },
+  {
+    "datei_hash": "7c380849a974fb8726066ada275c73b6b8ea76fd673636280f1d2ef44dacdaf6",
+    "datei_name": "Untitled.pdf",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument enthält technische Daten und Bedienungsanweisungen für einen WLAN-Router (NetBox 3000). Es liegen keine Informationen vor, die den erlaubten Kategorien (Wohnungseigentum, Mietobjekte, Zuwendungen) oder Dokumenttypen (Hausgeldabrechnung, Nebenkostenabrechnung, Zuwendungsbestätigung, Mietvertrag) entsprechen. Daher können keine der angeforderten Felder mit wörtlichen Auszügen aus dem Text belegt werden."
+  },
+  {
+    "datei_hash": "9b7bd0a8a861e5e0724774a5d25850c1bc89bba87100e729f3bad24181d67ded",
+    "datei_name": "Versicherung_2025.pdf",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "bezug_objekt",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zeitraum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_heizung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_wasser",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_muell",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betraege_reinigung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "gesamtbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "vorauszahlungen",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "nachzahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendungsbetrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "zuwendender",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwendungszweck",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaution",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "kaltmiete",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betriebskostenvorauszahlung",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "hausgeld_monatlich",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "instandhaltungsruecklage",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "verwalterguer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Beitragsrechnung für eine Privat-Haftpflichtversicherung. Es enthält keine Informationen zu den erlaubten Kategorien (Wohnungseigentum, Mietobjekte, Zuwendungen) oder Dokumenttypen (Hausgeldabrechnung, Nebenkostenabrechnung, Zuwendungsbestätigung, Mietvertrag). Daher werden alle Felder als 'unbekannt' klassifiziert und es werden keine Werte für die spezifischen Datenfelder extrahiert."
+  }
+]

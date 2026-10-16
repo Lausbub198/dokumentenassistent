@@ -1,0 +1,208 @@
+{% extends "basis.html" %}
+{% block titel %}Bestand öffnen{% endblock %}
+
+{% block inhalt %}
+<section class="block block-start">
+  <div class="block-rand"><span class="block-nr">00</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Bestand öffnen</h1>
+    <p class="vorspann">
+      Ein Quellordner, eine Zielablage. Die Quelle wird nur gelesen, nie verändert;
+      in die Zielablage kommen ausschließlich Kopien, die hier freigegeben wurden.
+    </p>
+
+    {% if fehler %}
+    <blockquote class="fehlermeldung fehlermeldung-knapp" role="alert">
+      <p class="fehler-text">{{ fehler }}</p>
+    </blockquote>
+    {% endif %}
+
+    <form method="post" action="/start" class="formular formular-start" id="start">
+      <div class="feld feld-breit">
+        <label class="feld-name" for="quelle">Quellordner</label>
+        <span class="feld-notiz">Absoluter Pfad &mdash; einfügen oder über „Ordner wählen“ suchen.</span>
+        <div class="feld-zeile">
+          <input type="text" name="quelle" class="mono" id="quelle" required autofocus
+                 value="{{ werte.quelle }}" placeholder="Quellordner" autocomplete="off" spellcheck="false">
+          <button type="button" class="knopf knopf-still feld-knopf" hidden
+                  data-feld="quelle" data-titel="Quellordner wählen">Ordner wählen…</button>
+        </div>
+      </div>
+
+      <div class="feld feld-breit">
+        <label class="feld-name" for="ziel">Zielablage</label>
+        <span class="feld-notiz">Leer lassen = neben der Quelle als <code>&lt;Quelle&gt;_sortiert</code>. Darf nicht in der Quelle liegen.</span>
+        <div class="feld-zeile">
+          <input type="text" name="ziel" class="mono" id="ziel"
+                 value="{{ werte.ziel }}" placeholder="Zielordner" autocomplete="off" spellcheck="false">
+          <button type="button" class="knopf knopf-still feld-knopf" hidden
+                  data-feld="ziel" data-titel="Zielablage wählen">Ordner wählen…</button>
+        </div>
+      </div>
+
+      <label class="feld feld-breit">
+        <span class="feld-name">Zweck <span class="feld-optional">optional</span></span>
+        <span class="feld-notiz">Wird im Profil vorbelegt. Ein Satz genügt.</span>
+        <input type="text" name="zweck" value="{{ werte.zweck }}"
+               placeholder="z. B. Unterlagen des Malerbetriebs Hoffmann, Geschäftsjahr 2025, für den Steuerberater">
+      </label>
+
+      <div class="formular-fuss">
+        <button type="submit" class="knopf knopf-haupt knopf-gross">Bestand öffnen</button>
+        <span class="formular-notiz">Öffnen liest noch nichts. Der erste Schritt im Profil ist „Quelle einlesen“.</span>
+      </div>
+    </form>
+
+    {# Außerhalb des Formulars: ein <form> im <form> wäre ungültig, und der Dialog
+       gehört ohnehin über die Seite, nicht in sie hinein. #}
+    <dialog class="dialog" id="ordnerdialog" aria-labelledby="ordnerdialog-titel">
+      <h2 class="titel titel-klein" id="ordnerdialog-titel">Ordner wählen</h2>
+      <p class="feld-notiz">
+        Nur Ordner, keine Dateien. Im Finder: Ordner markieren,
+        <kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>C</kbd> kopiert den Pfad &mdash; er lässt
+        sich auch direkt ins Feld einfügen.
+      </p>
+      <div class="browser-kasten">
+        <div class="browser-kopf">
+          <button type="button" class="knopf knopf-still browser-hoch" id="browser-hoch">&uarr; eine Ebene</button>
+          <span class="browser-pfad mono" id="browser-pfad"></span>
+        </div>
+        <ul class="browser-liste" id="browser-liste"></ul>
+        <p class="browser-meldung" id="browser-meldung" hidden></p>
+      </div>
+      <div class="dialog-fuss">
+        <button type="button" class="knopf" id="ordnerdialog-abbrechen">Abbrechen</button>
+        <button type="button" class="knopf knopf-haupt" id="ordnerdialog-waehlen">Diesen Ordner wählen</button>
+      </div>
+    </dialog>
+  </div>
+</section>
+
+{% if zuletzt %}
+<section class="block block-hell">
+  <div class="block-rand"><span class="block-nr">&#8635;</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Zuletzt geöffnet</h2>
+    <p class="vorspann">Die letzten {{ zuletzt | length }} Bestände. Ein Klick öffnet wieder.</p>
+    <ol class="zuletzt">
+      {% for eintrag in zuletzt %}
+      <li class="zuletzt-zeile">
+        <form method="post" action="/start">
+          <input type="hidden" name="quelle" value="{{ eintrag.quelle }}">
+          <input type="hidden" name="ziel" value="{{ eintrag.ziel }}">
+          <button type="submit" class="zuletzt-knopf">
+            <span class="zuletzt-quelle mono" title="{{ eintrag.quelle }}">{{ (eintrag.quelle|string).rstrip('/').split('/')[-1] }}</span>
+            <span class="zuletzt-ziel mono" title="{{ eintrag.ziel }}">&rarr; {{ (eintrag.ziel|string).rstrip('/').split('/')[-1] }}</span>
+            <span class="zuletzt-zeit">{{ eintrag.zeit | zeit_lokal if eintrag.zeit else '' }}</span>
+          </button>
+        </form>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block skripte %}
+<script>
+  // Nur Bedienkomfort: der Ziel-Platzhalter folgt der Quelle. Ohne JS gilt dieselbe Regel serverseitig.
+  (function () {
+    const quelle = document.getElementById('quelle');
+    const ziel = document.getElementById('ziel');
+    if (!quelle || !ziel) return;
+    const folgen = () => {
+      const q = quelle.value.trim().replace(/\/+$/, '');
+      ziel.placeholder = q ? q + '_sortiert' : 'Zielordner';
+    };
+    quelle.addEventListener('input', folgen);
+    folgen();
+
+    // Ordner-Wähler: ein Fenster über der Seite, das die Unterordner vom Server
+    // holt (/ordner). Ohne JS bleiben die Knöpfe unsichtbar und die Textfelder
+    // tragen die Eingabe allein — geprüft wird ohnehin serverseitig.
+    const dialog = document.getElementById('ordnerdialog');
+    const liste = document.getElementById('browser-liste');
+    const anzeige = document.getElementById('browser-pfad');
+    const meldung = document.getElementById('browser-meldung');
+    const hoch = document.getElementById('browser-hoch');
+    const titel = document.getElementById('ordnerdialog-titel');
+    const waehlen = document.getElementById('ordnerdialog-waehlen');
+    const abbrechen = document.getElementById('ordnerdialog-abbrechen');
+    const knoepfe = document.querySelectorAll('.feld-knopf');
+    if (!dialog || !dialog.showModal || !liste || !knoepfe.length) return;
+
+    let feld = null;       // das Textfeld, das der Dialog gerade füllt
+    let offen = null;      // der Ordner, der gerade angezeigt wird
+    let herkunft = null;   // Knopf, der den Dialog geöffnet hat — dorthin geht der Fokus zurück
+
+    const melden = (text) => {
+      meldung.textContent = text || '';
+      meldung.hidden = !text;
+    };
+
+    const oeffnen = async (pfad, ersterVersuch) => {
+      let daten;
+      try {
+        const antwort = await fetch(pfad ? '/ordner?pfad=' + encodeURIComponent(pfad) : '/ordner');
+        daten = await antwort.json();
+        if (!antwort.ok) throw new Error(daten.fehler || 'Ordner nicht lesbar.');
+      } catch (fehler) {
+        if (pfad && ersterVersuch) return oeffnen(null, false);  // Feldwert unbrauchbar: Heimat zeigen
+        melden(fehler.message);
+        return;
+      }
+      offen = daten.pfad;
+      anzeige.textContent = daten.pfad;
+      waehlen.disabled = false;
+      hoch.dataset.pfad = daten.eltern || '';
+      hoch.disabled = !daten.eltern;
+      liste.replaceChildren(...daten.ordner.map((eintrag) => {
+        const zeile = document.createElement('li');
+        const knopf = document.createElement('button');
+        knopf.type = 'button';
+        knopf.className = 'browser-knopf';
+        knopf.dataset.pfad = eintrag.pfad;
+        knopf.textContent = eintrag.name;  // textContent, nie innerHTML: Ordnernamen sind Fremdtext
+        zeile.className = 'browser-zeile';
+        zeile.appendChild(knopf);
+        return zeile;
+      }));
+      melden(daten.ordner.length ? '' : 'Keine Unterordner.');
+    };
+
+    knoepfe.forEach((knopf) => {
+      knopf.hidden = false;
+      knopf.addEventListener('click', () => {
+        feld = document.getElementById(knopf.dataset.feld);
+        herkunft = knopf;
+        titel.textContent = knopf.dataset.titel;
+        anzeige.textContent = '';
+        liste.replaceChildren();
+        melden('');
+        offen = null;
+        waehlen.disabled = true;
+        dialog.showModal();
+        oeffnen(feld.value.trim(), true);
+      });
+    });
+
+    liste.addEventListener('click', (ereignis) => {
+      const knopf = ereignis.target.closest('.browser-knopf');
+      if (knopf) oeffnen(knopf.dataset.pfad, false);
+    });
+    hoch.addEventListener('click', () => {
+      if (hoch.dataset.pfad) oeffnen(hoch.dataset.pfad, false);
+    });
+    waehlen.addEventListener('click', () => {
+      if (!offen || !feld) return;
+      feld.value = offen;
+      folgen();
+      dialog.close();
+    });
+    abbrechen.addEventListener('click', () => dialog.close());
+    // Auch nach Escape: der Fokus gehört zurück auf den Knopf, der das Fenster aufgemacht hat.
+    dialog.addEventListener('close', () => herkunft && herkunft.focus());
+  })();
+</script>
+{% endblock %}

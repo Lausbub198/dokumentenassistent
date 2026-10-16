@@ -1,0 +1,17 @@
+{
+ "datum": "2026-10-14",
+ "lauf": "Auftrag 505, Messwarteschlange, 00:04-00:30",
+ "code": "f754df1",
+ "konfiguration": "modelle.yaml (Produkt): qwen3-embedding:4b mit Pfad-Praefix, bge-reranker-v2-m3 k=20, dynamischer Kontext, Kaskade streng, gemma4:12b-it-q4_K_M 32k",
+ "pruefbestand_sha256_geprueft": true,
+ "fragen": 30,
+ "beantwortbar": 25,
+ "ohne_beleg": 5,
+ "belegt_mehrfach_gold": 23,
+ "belegt_streng": 19,
+ "positiv_abgewiesen": 0,
+ "negativ_abgewiesen": 5,
+ "sekunden_median": 42.5,
+ "modell_ladevorgaenge": 38,
+ "hinweis": "Fehlstart 10.10. 07:29: nach 1 Minute abgebrochen, 1 Antwort erzeugt, nicht gelesen, keine Konfigurationsaenderung danach. Nur Zaehlungen, keine Fragen, Antworten oder Dateinamen (privater Bestand)."
+}

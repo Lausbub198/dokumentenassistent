@@ -1,0 +1,23 @@
+{
+  "phasen_sekunden": {
+    "erfassen": 0.005147791998751927,
+    "auslesen": 1.7834137919999193,
+    "profil_vorschlagen": 6.315314208994096,
+    "einordnen": 246.29819750000024,
+    "konflikt_entscheiden": 4.159956006333232e-07,
+    "freigeben": 0.0007613750058226287,
+    "fragen": 0.00020612500520655885,
+    "zweiter_lauf": 240.60741608399985
+  },
+  "gesamt_sekunden": 495.0104572929995,
+  "modellaufrufe": {
+    "embed": 0,
+    "generate_json": 24,
+    "generate_text": 0
+  },
+  "modellzeit_sekunden": {
+    "embed": 0.0,
+    "generate_json": 491.46565212101996,
+    "generate_text": 0.0
+  }
+}

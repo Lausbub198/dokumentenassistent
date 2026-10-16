@@ -1,0 +1,37 @@
+{
+  "ist": {
+    "Anhang.pdf": "unklar",
+    "Dokument1 Kopie.pdf": "unklar",
+    "Dokument1.pdf": "duplikat",
+    "IMG_8831.jpg": "ocr_unsicher",
+    "Rechnung (2).pdf": "konflikt",
+    "Rechnung (3).pdf": "konflikt",
+    "Scan_0043.pdf": "konflikt",
+    "Untitled.pdf": "unklar"
+  },
+  "soll": {
+    "Anhang.pdf": "sicher",
+    "Dokument1 Kopie.pdf": "sicher",
+    "Dokument1.pdf": "duplikat",
+    "IMG_8831.jpg": "ocr_unsicher",
+    "Rechnung (2).pdf": "konflikt",
+    "Rechnung (3).pdf": "konflikt",
+    "Scan_0043.pdf": "konflikt",
+    "Untitled.pdf": "unklar"
+  },
+  "weitere_ist": {
+    "Beleg.pdf": "unklar",
+    "Hausgeld.pdf": "unklar",
+    "Lohnsteuer.pdf": "unklar",
+    "Scan_0044.pdf": "unklar",
+    "Versicherung_2025.pdf": "unklar"
+  },
+  "duplikate": [
+    "Dokument1.pdf"
+  ],
+  "freigegeben": [
+    "Wohnung Nord/2025-05-14_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "Wohnung Nord/2025-06-02_Korrekturrechnung_Heizung Sanitär Krause GmbH.pdf",
+    "Wohnung Nord/2025-05-14_Rechnung_Heizung Sanitär Krause GmbH (2).pdf"
+  ]
+}

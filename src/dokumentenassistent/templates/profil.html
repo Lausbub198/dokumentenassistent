@@ -1,0 +1,110 @@
+{% extends "basis.html" %}
+{% from "makros.html" import profilformular, fortschrittsblock %}
+{% block titel %}Profil{% endblock %}
+
+{% block kopf %}
+{# Nicht neu laden, solange ein Entwurf angezeigt wird: der kam per POST, ein Reload
+   wäre ein GET auf /profil/vorschlagen (405) und der Entwurf wäre weg (gefunden 10.10.2026). #}
+{% if fortschritt and not entwurf %}<meta http-equiv="refresh" content="5;url=/profil">{% endif %}
+{% endblock %}
+
+{% block inhalt %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">01</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Profil</h1>
+    <p class="vorspann">
+      Das Werkzeug liest eine Stichprobe und schlägt Ordnung vor. Verbindlich wird
+      erst, was hier bestätigt wird &mdash; und nur das gilt danach für jede Einordnung.
+    </p>
+
+    <ol class="schritte">
+      <li class="schritt {% if anzahl_dateien %}schritt-fertig{% endif %}">
+        <div class="schritt-kopf">
+          <span class="schritt-nr">1</span>
+          <h2>Quelle einlesen</h2>
+        </div>
+        {% if anzahl_dateien %}
+        <p class="schritt-lage">
+          <strong>{{ anzahl_dateien }}</strong> Dateien registriert,
+          <strong>{{ anzahl_fundstellen }}</strong> Textabschnitte erkannt,
+          <strong>{{ anzahl_duplikate }}</strong> {{ 'Duplikat' if anzahl_duplikate == 1 else 'Duplikate' }} erkannt.
+          Dafür braucht es noch keine KI &mdash; nur Lesen und Zerlegen.
+        </p>
+        {% else %}
+        <p class="schritt-lage">
+          Noch nichts gelesen. Der Quellordner wird registriert, per SHA&#8209;256
+          identifiziert, ausgelesen und in Fundstellen zerlegt. Originale bleiben unberührt.
+        </p>
+        {% endif %}
+        {% if fortschritt %}
+        {{ fortschrittsblock(job, fortschritt, "Auslesen läuft", None,
+            "Die Seite lädt sich alle fünf Sekunden neu. Bilder und PDFs ohne Textebene gehen durch die
+             Texterkennung — das ist der langsamste Schritt und braucht kein Sprachmodell.") }}
+        {% else %}
+        {% if job_meldung %}
+        <p class="meldung meldung-job" data-job="{{ 'fehler' if job.fehler else 'fertig' }}" role="status">
+          {{ job_meldung }}
+        </p>
+        {% endif %}
+        <form method="post" action="/profil/einlesen">
+          <button type="submit" class="knopf {% if anzahl_dateien %}knopf-still{% else %}knopf-haupt{% endif %}">
+            {% if anzahl_dateien %}Erneut einlesen{% else %}Quelle einlesen{% endif %}
+          </button>
+        </form>
+        {% endif %}
+      </li>
+
+      <li class="schritt {% if not anzahl_dateien %}schritt-wartet{% endif %}">
+        <div class="schritt-kopf">
+          <span class="schritt-nr">2</span>
+          <h2>Zweck beschreiben</h2>
+        </div>
+        <p class="schritt-lage">
+          Ein Satz genügt. Daraus schlägt das Modell Kategorien, Dokumenttypen,
+          Felder und ein Namensschema vor.
+        </p>
+        <form method="post" action="/profil/vorschlagen" class="zweck-zeile"
+              data-wartet="Das Modell liest fünf Dateien und schlägt Kategorien vor">
+          <input type="text" name="zweck" required
+                 value="{{ (entwurf or profil).zweck if (entwurf or profil) else (zweck_vorbelegt or '') }}"
+                 placeholder="z. B. Unterlagen der Musterfirma GmbH, Geschäftsjahr 2025, für den Steuerberater"
+                 {% if not anzahl_dateien %}disabled{% endif %}>
+          <button type="submit" class="knopf knopf-haupt" {% if not anzahl_dateien %}disabled{% endif %}>
+            Profil vorschlagen
+          </button>
+        </form>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{% if entwurf %}
+<section class="block block-hell">
+  <div class="block-rand"><span class="block-nr">02</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Entwurf des Modells</h2>
+    <p class="vorspann">
+      Noch nichts gespeichert. Ändern, streichen, ergänzen &mdash; dann bestätigen.
+    </p>
+    {{ profilformular(entwurf, "/profil/bestaetigen", "Profil bestätigen",
+                      "Nach der Bestätigung gilt das Profil für jede weitere Einordnung.") }}
+  </div>
+</section>
+{% elif profil %}
+<section class="block block-hell">
+  <div class="block-rand"><span class="block-nr">02</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Bestätigtes Profil</h2>
+    <p class="vorspann">
+      Gültig und gespeichert. Änderungen werden erneut bestätigt und protokolliert.
+    </p>
+    {{ profilformular(profil, "/profil/bestaetigen", "Änderungen bestätigen",
+                      "Neue Kategorien werden nur vorgeschlagen, nie automatisch angelegt.") }}
+    <p class="weiter">
+      <a href="/eingang" class="knopf knopf-still">Weiter zum Eingang</a>
+    </p>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

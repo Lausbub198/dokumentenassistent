@@ -1,0 +1,248 @@
+{% extends "basis.html" %}
+{% from "makros.html" import badge, konfliktkarte, freigabeleiste, balken, fortschrittsblock %}
+{% block titel %}Eingang{% endblock %}
+
+{% block kopf %}
+{% if job.laeuft %}<meta http-equiv="refresh" content="5">{% endif %}
+{% endblock %}
+
+{% block inhalt %}
+{% set offen = uebersicht.gesamt - uebersicht.abgearbeitet %}
+<section class="block">
+  <div class="block-rand"><span class="block-nr">02</span></div>
+  <div class="block-inhalt">
+    <h1 class="titel">Eingang</h1>
+    <p class="vorspann">
+      Ein Vorschlag je Datei, jeder mit Beleg. Anhaken, was stimmt; ändern, was
+      nicht stimmt; liegen lassen, was unklar bleibt.
+    </p>
+
+    {% if fortschritt %}
+    {{ fortschrittsblock(job, fortschritt, "Einordnen läuft", "/eingang/abbrechen",
+        "Die Seite lädt sich alle fünf Sekunden neu. Abbrechen beendet nach der laufenden Datei; „Stapel einordnen“ nimmt später den Rest, nichts wird doppelt gerechnet.") }}
+    {% else %}
+    {% if job_meldung %}
+    <p class="meldung meldung-job" data-job="{{ 'fehler' if job.fehler else ('abgebrochen' if job.abgebrochen else 'fertig') }}" role="status">
+      {{ job_meldung }}
+    </p>
+    {% endif %}
+    <div class="lage">
+      <p class="lage-satz">
+        <strong>{{ uebersicht.abgearbeitet }} von {{ uebersicht.gesamt }}</strong>
+        Dateien haben ein Ergebnis{% if offen %}, <strong>{{ offen }}</strong> warten{% endif %}.
+      </p>
+      <form method="post" action="/eingang/einordnen">
+        <button type="submit" class="knopf {% if offen %}knopf-haupt{% else %}knopf-still{% endif %}"
+                {% if not profil %}disabled title="Erst ein Profil bestätigen"
+                {% elif not offen %}disabled title="Alle Dateien haben ein Ergebnis"{% endif %}>
+          Stapel einordnen{% if offen %} <span class="zaehler">· {{ offen }}</span>{% endif %}
+        </button>
+      </form>
+    </div>
+
+    {% if not profil %}
+    <p class="hinter">
+      Noch kein bestätigtes Profil. <a href="/profil">Zum Profil</a> &mdash; ohne Profil
+      gibt es keine Kategorien, an denen eine Einordnung sich messen lässt.
+    </p>
+    {% elif not eingeordnet and offen %}
+    <p class="hinter">
+      {{ offen }} Dateien warten. Das Einordnen läuft im Hintergrund, fragt das Modell je
+      Datei und prüft jede Angabe gegen ihre Fundstelle. Du kannst jederzeit abbrechen.
+    </p>
+    {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+{% if uebersicht.gesamt %}
+<section class="block block-hell uebersicht">
+  <div class="block-rand"><span class="block-nr">&#8801;</span></div>
+  <div class="block-inhalt">
+    <div class="uebersicht-kopf">
+      <h2 class="titel titel-klein">Übersicht</h2>
+      <p class="uebersicht-notiz">Jede Zahl ist ein Filter. {{ uebersicht.ordner | length }} Ordner, {{ uebersicht.gesamt }} Dateien.</p>
+    </div>
+
+    <nav class="uebersicht-balken" aria-label="Status gesamt">
+      {{ balken(uebersicht.verteilung, filter, '', 'balken-gross') }}
+      <ul class="legende">
+        {% for p in uebersicht.verteilung %}
+        <li>
+          <a class="legende-posten" href="/eingang{{ filter.query(status=(p.status,)) }}"
+             {% if filter.status == (p.status,) %}aria-current="true"{% endif %}>
+            {{ badge(p.status) }}
+            <span class="legende-zahl" data-status="{{ p.status }}">{{ p.anzahl }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <ol class="ordner-lage">
+      {% for o in uebersicht.ordner %}
+      <li class="ordner-zeile" data-ordner="{{ o.name }}" {% if filter.ordner == o.name %}aria-current="true"{% endif %}>
+        <a class="ordner-lage-name" href="/eingang{{ filter.query(ordner=o.name) }}">
+          <span class="ordner-lage-pfad">{{ o.name }}</span>
+          <span class="ordner-lage-gesamt">{{ o.gesamt }} {{ 'Datei' if o.gesamt == 1 else 'Dateien' }}</span>
+        </a>
+        {{ balken(o.verteilung, filter, o.name, 'balken-mini') }}
+        <span class="ordner-lage-zahlen">
+          {% for p in o.verteilung %}
+          <a class="lage-zahl" data-status="{{ p.status }}" title="{{ STATUS_TEXT[p.status] }}"
+             href="/eingang{{ filter.query(ordner=o.name, status=(p.status,)) }}">{{ p.anzahl }}</a>
+          {% endfor %}
+        </span>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<form method="get" action="/eingang" class="filterleiste" id="filter" {% if filter.aktiv %}data-aktiv="ja"{% endif %}>
+  <fieldset class="filter-status">
+    <legend class="verborgen">Status</legend>
+    {% for status in LAGE_STATUS %}
+    <label class="filter-pille" data-status="{{ status }}">
+      <input type="checkbox" name="status" value="{{ status }}" {% if status in filter.status %}checked{% endif %}>
+      <span>{{ STATUS_TEXT[status] }}</span>
+    </label>
+    {% endfor %}
+  </fieldset>
+  <label class="filter-feld">
+    <span class="verborgen">Ordner</span>
+    <select name="ordner">
+      <option value="">alle Ordner</option>
+      {% for o in uebersicht.ordner %}
+      <option value="{{ o.name }}" {% if filter.ordner == o.name %}selected{% endif %}>{{ o.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label class="filter-feld filter-suche">
+    <span class="verborgen">Dateiname</span>
+    <input type="search" name="suche" value="{{ filter.suche }}" placeholder="Dateiname enthält …" autocomplete="off">
+  </label>
+  <button type="submit" class="knopf knopf-still">Filtern</button>
+  {% if filter.aktiv %}
+  <a href="/eingang" class="filter-loeschen">Filter löschen</a>
+  <span class="filter-treffer">{{ zeilen | length }} von {{ uebersicht.gesamt }}</span>
+  {% endif %}
+</form>
+{% endif %}
+
+{% if zeilen %}
+<form method="post" action="/eingang/freigeben" id="stapel">
+  <input type="hidden" name="zurueck" value="/eingang{{ filter.query() }}">
+  {% if eingeordnet %}{{ freigabeleiste('oben', anzahl_sicher, filter.aktiv) }}{% endif %}
+
+  <table class="stapel">
+    <caption class="verborgen">Vorschläge je Datei</caption>
+    <thead>
+      <tr>
+        <th scope="col" class="spalte-haken"><span class="verborgen">Auswahl</span></th>
+        <th scope="col">Quelle</th>
+        <th scope="col">Ordner</th>
+        <th scope="col">Kategorie</th>
+        <th scope="col">Zielname</th>
+        <th scope="col">Status</th>
+        <th scope="col">Beleg</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for zeile in zeilen %}
+      {% set v = zeile.vorschlag %}
+      <tr data-status="{{ zeile.status }}" data-ziel="/eingang/{{ zeile.datei.hash }}">
+        <td class="spalte-haken">
+          <input type="checkbox" name="hashes" value="{{ zeile.datei.hash }}"
+                 aria-label="{{ zeile.datei.name }} freigeben"
+                 {% if zeile.status != 'sicher' %}disabled{% endif %}>
+        </td>
+        <td class="spalte-quelle">
+          <a href="/eingang/{{ zeile.datei.hash }}" class="quelle-name">{{ zeile.datei.name }}</a>
+          <span class="quelle-meta">{{ (zeile.datei.groesse / 1024) | round | int }} kB</span>
+        </td>
+        <td class="spalte-ordner mono">{{ zeile.relordner or '(Quelle)' }}</td>
+        <td class="spalte-kategorie">{{ v.kategorie if v and v.kategorie else '—' }}</td>
+        <td class="mono spalte-ziel">{{ v.zielname if v and v.zielname else '—' }}</td>
+        <td>
+          {% if zeile.status == 'wartet' %}<span class="wartet">wartet</span>
+          {% else %}{{ badge(zeile.status) }}{% endif %}
+        </td>
+        <td class="spalte-beleg">
+          {% if zeile.beleg %}
+          <span class="beleg-wortlaut">„{{ zeile.beleg.wortlaut | truncate(58, true, '…') }}“</span>
+          <span class="beleg-zahl">{{ zeile.belege }} von {{ v.felder | length }} Feldern belegt</span>
+          {% elif zeile.original %}
+          <span class="beleg-grund">gleich wie {{ zeile.original.name }} &mdash; bleibt liegen</span>
+          {% elif v and v.begruendung %}
+          <span class="beleg-grund">{{ v.begruendung | truncate(72, true, '…') }}</span>
+          {% elif v %}
+          <span class="beleg-grund">kein Beleg</span>
+          {% else %}
+          <span class="beleg-grund">noch nicht eingeordnet</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if eingeordnet %}{{ freigabeleiste('unten', anzahl_sicher, filter.aktiv) }}{% endif %}
+</form>
+{% elif filter.aktiv %}
+<p class="hinter hinter-leer">
+  Keine Datei passt zum Filter. <a href="/eingang">Filter löschen</a>
+</p>
+{% endif %}
+
+{% if karten %}
+<section class="block block-hell">
+  <div class="block-rand"><span class="block-nr">!</span></div>
+  <div class="block-inhalt">
+    <h2 class="titel titel-klein">Offene Konflikte</h2>
+    <p class="vorspann">
+      Zwei Dokumente, ein Feld, zwei Werte. Solange das offen ist, bleiben beide
+      Dateien aus der Zielablage heraus.
+    </p>
+    {% for karte in karten %}
+    {{ konfliktkarte(karte, '/eingang') }}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block skripte %}
+<script>
+  // Nur Bedienkomfort: Zähler, "alle sicheren anhaken", Filter-Sofortabsenden.
+  // Die laufenden Sekunden kommen aus basis.html. Ohne JS bleibt alles bedienbar.
+  (function () {
+    const filter = document.getElementById('filter');
+    if (filter) filter.querySelectorAll('input[type="checkbox"], select').forEach((f) => {
+      f.addEventListener('change', () => filter.requestSubmit());
+    });
+
+    const formular = document.getElementById('stapel');
+    if (!formular) return;
+    const haken = () => Array.from(formular.querySelectorAll('input[name="hashes"]:not([disabled])'));
+    const zaehlen = () => {
+      const n = haken().filter((k) => k.checked).length;
+      formular.querySelectorAll('[data-zaehler]').forEach((z) => { z.textContent = n ? ' · ' + n : ''; });
+      formular.querySelectorAll('.knopf-freigabe').forEach((b) => { b.disabled = n === 0; });
+    };
+    formular.addEventListener('change', zaehlen);
+    const alle = document.getElementById('alle-sicheren');
+    if (alle) alle.addEventListener('change', () => {
+      haken().forEach((k) => { k.checked = alle.checked; });
+      zaehlen();
+    });
+    formular.querySelectorAll('tbody tr').forEach((zeile) => {
+      zeile.addEventListener('click', (e) => {
+        if (e.target.closest('a, input, label, button')) return;
+        window.location = zeile.dataset.ziel;
+      });
+    });
+    zaehlen();
+  })();
+</script>
+{% endblock %}

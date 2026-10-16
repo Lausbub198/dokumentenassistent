@@ -1,0 +1,43 @@
+{
+  "ist": {
+    "Anhang.pdf": "sicher",
+    "Dokument1 Kopie.pdf": "sicher",
+    "Dokument1.pdf": "duplikat",
+    "IMG_8831.jpg": "ocr_unsicher",
+    "Rechnung (2).pdf": "konflikt",
+    "Rechnung (3).pdf": "konflikt",
+    "Scan_0043.pdf": "konflikt",
+    "Untitled.pdf": "unklar"
+  },
+  "soll": {
+    "Anhang.pdf": "sicher",
+    "Dokument1 Kopie.pdf": "sicher",
+    "Dokument1.pdf": "duplikat",
+    "IMG_8831.jpg": "ocr_unsicher",
+    "Rechnung (2).pdf": "konflikt",
+    "Rechnung (3).pdf": "konflikt",
+    "Scan_0043.pdf": "konflikt",
+    "Untitled.pdf": "unklar"
+  },
+  "weitere_ist": {
+    "Beleg.pdf": "sicher",
+    "Hausgeld.pdf": "sicher",
+    "Lohnsteuer.pdf": "sicher",
+    "Scan_0044.pdf": "unklar",
+    "Versicherung_2025.pdf": "sicher"
+  },
+  "duplikate": [
+    "Dokument1.pdf"
+  ],
+  "freigegeben": [
+    "Wohnung Süd/2025-03-28_Abrechnung_Hausverwaltung Sommer & Partner.pdf",
+    "Sonstiges/2025-11-14_Bescheinigung_Tierschutzverein Neustadt e.V..pdf",
+    "Wohnung Nord/2022-02-24_Vertrag_Andrea Beispiel.pdf",
+    "Wohnung Nord/2025-04-15_Abrechnung_Immo Verwalt GmbH, WEG-Verwaltung.pdf",
+    "Sonstiges/2026-01-15_Bescheinigung_Muster Technik AG.pdf",
+    "Wohnung Nord/2025-05-14_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "Wohnung Nord/2025-06-02_Korrekturrechnung_Heizung Sanitär Krause GmbH.pdf",
+    "Wohnung Nord/2025-05-14_Rechnung_Heizung Sanitär Krause GmbH (2).pdf",
+    "Sonstiges/2025-01-08_Abrechnung_Nordstern Versicherung.pdf"
+  ]
+}

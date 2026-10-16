@@ -1,0 +1,533 @@
+[
+  {
+    "datei_hash": "84c608a071a851f3c7dfae222d9baad418c74f5f36cf26d6fe1a59c8f4043ba9",
+    "datei_name": "Anhang.pdf",
+    "kategorie": "Wohnung Süd",
+    "typ": "Abrechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-03-28",
+        "beleg": {
+          "fundstelle_id": "Anhang.pdf#S1#A1",
+          "wortlaut": "Datum 28.03.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Hausverwaltung Sommer & Partner",
+        "beleg": {
+          "fundstelle_id": "Anhang.pdf#S1#A1",
+          "wortlaut": "Hausverwaltung Sommer & Partner"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "1.912,40 EUR",
+        "beleg": {
+          "fundstelle_id": "Anhang.pdf#S1#A1",
+          "wortlaut": "Gesamtbetrag 1.912,40 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "unbekannt",
+        "beleg": {
+          "fundstelle_id": "Anhang.pdf#S1#A1",
+          "wortlaut": "Nebenkostenabrechnung 2024, Objekt Wohnung Süd"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2025-03-28_Abrechnung_Hausverwaltung Sommer & Partner.pdf",
+    "status": "sicher",
+    "begruendung": "Das Dokument ist eine Nebenkostenabrechnung für das Objekt 'Wohnung Süd' (Kategorie: Wohnung Süd). Der Aussteller ist 'Hausverwaltung Sommer & Partner'. Das Datum der Abrechnung steht als '28.03.2025'. Der Hauptbetrag (Gesamtbetrag) beträgt '1.912,40 EUR'. Eine explizite Rechnungsnummer ist im Text nicht vorhanden, daher wird für dieses Feld 'unbekannt' gewählt."
+  },
+  {
+    "datei_hash": "675baeb310961f686893f7023fc1d085e80ccbce12eb0f3127b5d00c22fd1256",
+    "datei_name": "Beleg.pdf",
+    "kategorie": "Sonstiges",
+    "typ": "Bescheinigung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-11-14",
+        "beleg": {
+          "fundstelle_id": "Beleg.pdf#S1#A1",
+          "wortlaut": "Neustadt, 14.11.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Tierschutzverein Neustadt e.V.",
+        "beleg": {
+          "fundstelle_id": "Beleg.pdf#S1#A1",
+          "wortlaut": "Tierschutzverein Neustadt e.V., Tierheimweg 3, 12345 Neustadt"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "250,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Beleg.pdf#S1#A1",
+          "wortlaut": "Betrag der Zuwendung 250,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": "2025-11-14_Bescheinigung_Tierschutzverein Neustadt e.V..pdf",
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Zuwendungsbestätigung für einen Tierschutzverein. Da es sich nicht um eine der spezifischen Kategorien (Wohnung Süd, Wohnung Nord, Immo Verwalt GmbH) handelt und kein direkter Bezug zu den vermieteten Wohnungen als Objekt besteht, wird die Sammelkategorie 'Sonstiges' verwendet. Der Dokumenttyp ist eine Bescheinigung (Zuwendungsbestätigung). Es gibt keine Rechnungsnummer im Text."
+  },
+  {
+    "datei_hash": "3f06db1a47eb50b743aa10c0e1d335c8b200b4ac5454ddfff04adeb906cf02f9",
+    "datei_name": "Dokument1 Kopie.pdf",
+    "kategorie": "Wohnung Nord",
+    "typ": "Vertrag",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2022-02-24",
+        "beleg": {
+          "fundstelle_id": "Dokument1 Kopie.pdf#S2#A1",
+          "wortlaut": "Neustadt, 24.02.2022"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Andrea Beispiel",
+        "beleg": {
+          "fundstelle_id": "Dokument1 Kopie.pdf#S1#A1",
+          "wortlaut": "Vermieterin: Andrea Beispiel"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "970,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Dokument1 Kopie.pdf#S1#A1",
+          "wortlaut": "Gesamtmiete 970,00 EUR monatlich"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "unbekannt",
+        "beleg": {
+          "fundstelle_id": "Dokument1 Kopie.pdf#S1#A1",
+          "wortlaut": "Mietvertrag über Wohnraum"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2022-02-24_Vertrag_Andrea Beispiel.pdf",
+    "status": "sicher",
+    "begruendung": "Das Dokument ist ein Mietvertrag (Typ: Vertrag) für das Objekt 'Wohnung Nord' (Kategorie: Wohnung Nord), wie in Absatz S1#A1 explizit genannt ('Mietobjekt: Wohnung Nord'). Der Aussteller ist die Vermieterin Andrea Beispiel. Der Hauptbetrag des Dokuments ist die monatliche Gesamtmiete von 970,00 EUR. Ein Datum findet sich im Abschluss des Vertrags (24.02.2022). Eine Rechnungsnummer ist im Text nicht enthalten."
+  },
+  {
+    "datei_hash": "68a7578a01871d1a446f87676b3725a8d8f9ddf0b3076812e0a1e79c3d56d5b5",
+    "datei_name": "Hausgeld.pdf",
+    "kategorie": "Wohnung Nord",
+    "typ": "Abrechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-04-15",
+        "beleg": {
+          "fundstelle_id": "Hausgeld.pdf#S1#A1",
+          "wortlaut": "Datum 15.04.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Immo Verwalt GmbH",
+        "beleg": {
+          "fundstelle_id": "Hausgeld.pdf#S1#A1",
+          "wortlaut": "Immo Verwalt GmbH, WEG-Verwaltung, Verwalterplatz 2, 12345 Neustadt"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "2.340,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Hausgeld.pdf#S1#A1",
+          "wortlaut": "Jahresbetrag 2.340,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "unbekannt",
+        "beleg": {
+          "fundstelle_id": "Hausgeld.pdf#S1#A1",
+          "wortlaut": "Hausgeldabrechnung 2024, Wohnungseigentum Nr. 7"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2025-04-15_Abrechnung_Immo Verwalt GmbH.pdf",
+    "status": "sicher",
+    "begruendung": "Das Dokument ist eine Abrechnung (Typ) für die Wohnung Nord (Kategorie), da im Text explizit 'Wohnung Nord' steht. Der Hauptbetrag ist der Jahresbetrag von 2.340,00 EUR. Der Aussteller ist Immo Verwalt GmbH. Das Datum des Dokuments ist 15.04.2025. Eine spezifische Rechnungsnummer (z.B. eine ID) findet sich nicht wörtlich im Text; 'Wohnungseigentum Nr. 7' ist ein Objektbezeichner, keine Rechnungsnummer, daher wird für dieses Feld 'unbekannt' gewählt."
+  },
+  {
+    "datei_hash": "2cddae49bed1a5f108b64705ac254f0c592f6424a66560422f20dd822773fa76",
+    "datei_name": "IMG_8831.jpg",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "ocr_unsicher",
+    "begruendung": "Keine Fundstellen: kein Text zum Einordnen"
+  },
+  {
+    "datei_hash": "51e31b3bffe7bc9575a99cd6b63107acc23be54d18ca0cfa835bdadfa946ba84",
+    "datei_name": "Lohnsteuer.pdf",
+    "kategorie": "Sonstiges",
+    "typ": "Bescheinigung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2026-01-15",
+        "beleg": {
+          "fundstelle_id": "Lohnsteuer.pdf#S1#A1",
+          "wortlaut": "am 15.01.2026"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Muster Technik AG",
+        "beleg": {
+          "fundstelle_id": "Lohnsteuer.pdf#S1#A1",
+          "wortlaut": "Muster Technik AG"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "9.480,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Lohnsteuer.pdf#S1#A1",
+          "wortlaut": "Einbehaltene Lohnsteuer 9.480,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": "2026-01-15_Bescheinigung_Muster Technik AG.pdf",
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Lohnsteuerbescheinigung für einen Arbeitnehmer (Andrea Beispiel) und keine Rechnung oder Vertrag im Sinne der Immobilienverwaltung. Es bezieht sich nicht auf die vermieteten Wohnungen (Wohnung Süd/Nord), den Tierschutzverein oder Immo Verwalt GmbH, daher fällt es unter 'Sonstiges'. Der Aussteller ist die ausstellende Stelle (Muster Technik AG). Der Hauptbetrag ist die einbehaltene Lohnsteuer. Eine Rechnungsnummer ist im Text nicht enthalten."
+  },
+  {
+    "datei_hash": "e56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d",
+    "datei_name": "Rechnung (2).pdf",
+    "kategorie": "Wohnung Nord",
+    "typ": "Rechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-05-14",
+        "beleg": {
+          "fundstelle_id": "Rechnung (2).pdf#S1#A1",
+          "wortlaut": "Rechnungsdatum 14.05.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Heizung Sanitär Krause GmbH",
+        "beleg": {
+          "fundstelle_id": "Rechnung (2).pdf#S1#A1",
+          "wortlaut": "Heizung Sanitär Krause GmbH"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "1.240,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Rechnung (2).pdf#S1#A1",
+          "wortlaut": "Rechnungsbetrag 1.240,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "2025-0815",
+        "beleg": {
+          "fundstelle_id": "Rechnung (2).pdf#S1#A1",
+          "wortlaut": "Rechnung Nr. 2025-0815"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2025-05-14_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "status": "konflikt",
+    "begruendung": "Das Dokument ist eine Rechnung für Leistungen am Leistungsort 'Wohnung Nord' (Musterstraße 3, Wohnung Nord). Daher wird die Kategorie 'Wohnung Nord' gewählt. Der Gesamtbetrag der Rechnung beträgt 1.240,00 EUR."
+  },
+  {
+    "datei_hash": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28",
+    "datei_name": "Rechnung (3).pdf",
+    "kategorie": "Wohnung Nord",
+    "typ": "Rechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-06-02",
+        "beleg": {
+          "fundstelle_id": "Rechnung (3).pdf#S1#A1",
+          "wortlaut": "Rechnungsdatum 02.06.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Heizung Sanitär Krause GmbH",
+        "beleg": {
+          "fundstelle_id": "Rechnung (3).pdf#S1#A1",
+          "wortlaut": "Heizung Sanitär Krause GmbH, Handwerkerweg 8, 12345 Neustadt"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "1.180,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Rechnung (3).pdf#S1#A1",
+          "wortlaut": "Korrigierter Rechnungsbetrag 1.180,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "2025-0815-K",
+        "beleg": {
+          "fundstelle_id": "Rechnung (3).pdf#S1#A1",
+          "wortlaut": "Korrekturrechnung Nr. 2025-0815-K"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2025-06-02_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "status": "konflikt",
+    "begruendung": "Das Dokument ist eine Korrekturrechnung für Leistungen am Leistungsort 'Musterstraße 3, Wohnung Nord'. Daher wird die Kategorie 'Wohnung Nord' gewählt. Der Hauptbetrag der Rechnung (Korrigierter Rechnungsbetrag) beträgt 1.180,00 EUR."
+  },
+  {
+    "datei_hash": "3371bcfbc1e62df136c728ebf9fd5b0547039047a55792981c2c771bf26076e5",
+    "datei_name": "Scan_0043.pdf",
+    "kategorie": "Wohnung Nord",
+    "typ": "Rechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-05-14",
+        "beleg": {
+          "fundstelle_id": "Scan_0043.pdf#S1#A2",
+          "wortlaut": "Rechnungsdatum 14.05.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Heizung Sanitär Krause GmbH",
+        "beleg": {
+          "fundstelle_id": "Scan_0043.pdf#S1#A1",
+          "wortlaut": "Heizung Sanitär Krause GmbH"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "1.240,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Scan_0043.pdf#S1#A5",
+          "wortlaut": "Rechnungsbetrag 1.240,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "2025-0815",
+        "beleg": {
+          "fundstelle_id": "Scan_0043.pdf#S1#A2",
+          "wortlaut": "Rechnung Nr. 2025-0815"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2025-05-14_Rechnung_Heizung Sanitär Krause GmbH.pdf",
+    "status": "konflikt",
+    "begruendung": "Das Dokument ist eine Rechnung (Typ) für Reparaturen an der Heizung in Wohnung Nord (Kategorie). Der Aussteller ist die Firma im Kopf des Dokuments. Das Datum und die Rechnungsnummer finden sich im zweiten Absatz. Der Betrag steht im fünften Absatz."
+  },
+  {
+    "datei_hash": "323ee672a22a1150fb9b1c84126666a4c7f770b09ca138bc94107e7fbbd3a873",
+    "datei_name": "Scan_0044.pdf",
+    "kategorie": "Wohnung Süd",
+    "typ": "Bescheid",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-01-20",
+        "beleg": {
+          "fundstelle_id": "Scan_0044.pdf#S1#A2",
+          "wortlaut": "Bescheiddatum 20.01.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Stadt Neustadt Amt für Finanzen",
+        "beleg": {
+          "fundstelle_id": "Scan_0044.pdf#S1#A1",
+          "wortlaut": "Stadt Neustadt\nAmt für Finanzen"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "412,00 EUR",
+        "beleg": {
+          "fundstelle_id": "Scan_0044.pdf#S1#A5",
+          "wortlaut": "Jahresbetrag 412,00 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": "GS-2025-0731",
+        "beleg": {
+          "fundstelle_id": "Scan_0044.pdf#S1#A2",
+          "wortlaut": "Aktenzeichen GS-2025-0731"
+        },
+        "status": "belegt"
+      }
+    ],
+    "zielname": "2025-01-20_Bescheid_Stadt Neustadt Amt für Finanzen.pdf",
+    "status": "sicher",
+    "begruendung": "Das Dokument ist ein Grundsteuerbescheid für das Grundstück 'Gartenweg 12, Wohnung Süd' (Fundstelle A4), daher wird die Kategorie 'Wohnung Süd' gewählt. Der Aussteller ist die Behörde 'Stadt Neustadt Amt für Finanzen'. Der Hauptbetrag des Dokuments ist der Jahresbetrag von 412,00 EUR. Das Datum ist das Bescheiddatum und die Rechnungsnummer entspricht dem Aktenzeichen."
+  },
+  {
+    "datei_hash": "7c380849a974fb8726066ada275c73b6b8ea76fd673636280f1d2ef44dacdaf6",
+    "datei_name": "Untitled.pdf",
+    "kategorie": null,
+    "typ": null,
+    "felder": [
+      {
+        "name": "datum",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "aussteller",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "betrag",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": null,
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Bedienungsanleitung für einen WLAN-Router (NetBox 3000). Es enthält keine Informationen zu vermieteten Wohnungen, Tierschutzvereinen oder Immobilienverwaltungsgesellschaften. Daher passt es nicht in die spezifischen Kategorien ('Wohnung Süd', 'Wohnung Nord', 'Tierschutzverein Neustadt e.V.', 'Immo Verwalt GmbH'). Da es auch kein steuerrelevantes Dokument für den Zweck des Bestands (Steuererklärung 2025 für Vermietungen) ist, sondern ein technisches Handbuch, wird die Sammelkategorie nicht angewendet, sondern 'unbekannt' gewählt. Es fehlen zudem alle erforderlichen Felder wie Datum, Aussteller, Betrag oder Rechnungsnummer."
+  },
+  {
+    "datei_hash": "9b7bd0a8a861e5e0724774a5d25850c1bc89bba87100e729f3bad24181d67ded",
+    "datei_name": "Versicherung_2025.pdf",
+    "kategorie": "Sonstiges",
+    "typ": "Abrechnung",
+    "felder": [
+      {
+        "name": "datum",
+        "wert": "2025-01-08",
+        "beleg": {
+          "fundstelle_id": "Versicherung_2025.pdf#S1#A1",
+          "wortlaut": "Rechnungsdatum 08.01.2025"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "aussteller",
+        "wert": "Nordstern Versicherung",
+        "beleg": {
+          "fundstelle_id": "Versicherung_2025.pdf#S1#A1",
+          "wortlaut": "Nordstern Versicherung, Seeufer 9, 12345 Neustadt"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "betrag",
+        "wert": "89,50 EUR",
+        "beleg": {
+          "fundstelle_id": "Versicherung_2025.pdf#S1#A1",
+          "wortlaut": "Jahresbeitrag 89,50 EUR"
+        },
+        "status": "belegt"
+      },
+      {
+        "name": "rechnungsnummer",
+        "wert": null,
+        "beleg": null,
+        "status": "unklar"
+      }
+    ],
+    "zielname": "2025-01-08_Abrechnung_Nordstern Versicherung.pdf",
+    "status": "unklar",
+    "begruendung": "Das Dokument ist eine Beitragsrechnung für eine Privat-Haftpflichtversicherung der Versicherten Andrea Beispiel. Es handelt sich nicht um eine Rechnung oder Abrechnung direkt an einen Vermieter (Wohnung Nord/Süd) oder an den Tierschutzverein. Da es kein Mietobjekt darstellt und keine direkte Zuordnung zu Immo Verwalt GmbH vorliegt, fällt es unter die Sammelkategorie 'Sonstiges'. Der Dokumenttyp ist eine Beitragsrechnung, was dem erlaubten Typ 'Abrechnung' entspricht."
+  }
+]

@@ -1,0 +1,8 @@
+# Das Gegenlese-Paket enthaelt absichtlich Dokumentinhalt: die Seitenbilder und den
+# OCR-Volltext aller Varianten. Es bleibt lokal -- derselbe Grund, aus dem
+# beweise/ocr-scans/ in der Haupt-.gitignore steht.
+gegenlesen.html
+*.png
+# laeufe.jsonl und README.md fuehren nur Kennzahlen (Seitenzahl, Zeichen, Zahlen, Daten,
+# Konfidenz, Dauer) und bleiben deshalb versioniert.
+!laeufe.jsonl

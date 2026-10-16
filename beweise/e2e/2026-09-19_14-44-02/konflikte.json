@@ -1,0 +1,21 @@
+[
+  {
+    "id": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28__e56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d__betrag",
+    "feld": "betrag",
+    "hash_a": "e56032e3b146817b4c6351c650d0516a075db77055cd73fcdff38978a96b445d",
+    "hash_b": "8b3800253b0416011d4ee156194af4b9f46f226aa6d176abe51accf27fa1ba28",
+    "wert_a": "1.240,00 EUR",
+    "wert_b": "1.180,00 EUR",
+    "beleg_a": {
+      "fundstelle_id": "Rechnung (2).pdf#S1#A1",
+      "wortlaut": "Rechnungsbetrag 1.240,00 EUR"
+    },
+    "beleg_b": {
+      "fundstelle_id": "Rechnung (3).pdf#S1#A1",
+      "wortlaut": "Korrigierter Rechnungsbetrag 1.180,00 EUR"
+    },
+    "vorschlag": "ersetzt",
+    "entscheidung": null,
+    "eigener_wert": null
+  }
+]
