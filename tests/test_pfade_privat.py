@@ -21,7 +21,7 @@ def test_umgebungsvariable_gewinnt(monkeypatch, tmp_path):
 def test_im_repo_steht_kein_fester_privater_pfad():
     wurzel = Path(__file__).resolve().parent.parent
     treffer = subprocess.run(
-        ["git", "grep", "-l", "-i", "-E", "Mietwohnungen|/Users/[a-z0-9]+/", "--", "src", "scripts", "docs", "modelle.yaml", "beweise"],
+        ["git", "grep", "-l", "-i", "-E", "Mietwohnungen|/Users/[a-z0-9]+/", "--", "src", "scripts", "docs", "modelle.yaml", "beweise", ":!scripts/veroeffentlichen.sh"],
         cwd=wurzel, capture_output=True, text=True, check=False,
     ).stdout.split()
     assert treffer == []

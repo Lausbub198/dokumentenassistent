@@ -1,5 +1,7 @@
 # Dokumentenassistent
 
+🇩🇪 Deutsch · 🇬🇧 [English](README.en.md)
+
 Lokales Werkzeug: liest einen Dokumentenordner, schlägt ein Profil vor (Kategorien, Felder, Namensschema), ordnet jede Datei mit wörtlichen Fundstellen ein, legt **nach menschlicher Freigabe** sortierte Kopien an und beantwortet Fragen ausschließlich mit geprüften Belegen. Originale werden nie verändert.
 
 Modelle laufen über Ollama (`modelle.yaml`). Kein Cloud-Zugriff.
