@@ -185,6 +185,10 @@ claude mcp add dokumentenassistent -- uv run --project /pfad/zu/dokumentenassist
 
 Architektur und Testplan: siehe `docs/` (wird mit dem ersten Release ergänzt).
 
+## Kontakt
+
+Fragen, Fehler und Ideen am liebsten als Issue hier im Repository. Für alles andere: built@kifuerdenmittelstand.tech
+
 ## Lizenz
 
 MIT, siehe `LICENSE`. Die Modelle (Gemma, Qwen, BGE) und Pakete stehen unter ihren eigenen Lizenzen und werden nicht mitgeliefert.

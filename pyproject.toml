@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Lokaler Dokumentenassistent: ordnet Dokumente per Profil ein, legt nach Freigabe Kopien an, beantwortet Fragen nur mit geprüften Fundstellen."
 readme = "README.md"
 license = { file = "LICENSE" }
-authors = [{ name = "Andreas Nürenberg", email = "andreas.nuerenberg@gmail.com" }]
+authors = [{ name = "Andreas Nürenberg", email = "built@kifuerdenmittelstand.tech" }]
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115",
