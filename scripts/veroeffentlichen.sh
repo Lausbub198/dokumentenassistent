@@ -36,7 +36,7 @@ EMAIL="$(git -C "$KLON" config user.email)"
 echo "== 3/5 Stand von HEAD übernehmen"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-git archive HEAD | tar -x -C "$TMP"
+git archive HEAD . ':(exclude)CLAUDE.md' | tar -x -C "$TMP"
 rsync -a --delete --exclude .git "$TMP"/ "$KLON"/
 git -C "$KLON" add -A
 if git -C "$KLON" diff --cached --quiet; then
